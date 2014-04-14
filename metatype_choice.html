@@ -73,10 +73,10 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <form role="form-metaype">
+          <form role="form-metaype" method="POST" action="customisation.php">
             <div class="form-group">
               <label for="metatype">Métatype</label>
-              <select class="form-control input-lg" id="choix-metatype" onChange="changeNomMetatype();">
+              <select class="form-control input-lg" name="choix-metatype" id="choix-metatype" onChange="changeNomMetatype();">
                 <option value="Humain">Humain</option>
                 <option value="Ork">Ork</option>
                 <option value="Nain">Nain</option>
