@@ -33,13 +33,75 @@
         		</div>
       		</div>
     	</div>
-    	<!-- Fin de la barre de navigation -->	
+    	<!-- Fin de la barre de navigation -->
+
+      <div class="container" style="padding-top: 60px;">
+        <h1 style="text-align:center;">Répartissez vos points</h1>	
 
 <?php
 
-echo $_POST['choix-metatype'];
+$totaux_points = 400;
+$points_disponibles = 0;
+$points_attributs = array(
+  'actuels' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intelligence' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0),
+  'minimums' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intelligence' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0),
+  'maximums' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intelligence' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0));
+
+init();
+
+echo "<h2 style='text-align:center;'>".$_POST['choix-metatype']."</h2>";
+echo "<h3 style='text-align:center;'>Nombre de points disponibles : ".$points_disponibles."</h2>";
+
+
+
+
+function init() {
+  global $totaux_points, $points_disponibles;
+  $totaux_points = 400;
+  switch ($_POST['choix-metatype']) {
+    case 'Ork':
+      $points_disponibles = $totaux_points - 20;
+      $points_attributs = array(
+        'actuels' => array('constitution' => 4, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intelligence' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0),
+        'minimums' => array('constitution' => 4, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intelligence' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0),
+        'maximums' => array('constitution' => 9, 'agilite' => 6, 'reaction' => 6, 'force' => 8, 'charisme' => 5, 'intelligence' => 6, 'logique' => 5, 'volonte' => 6, 'chance' => 10, 'initiative' => 0));
+      break;
+
+    case 'Nain':
+      $points_disponibles = $totaux_points - 25;
+      $points_attributs = array(
+        'actuels' => array('constitution' => 2, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intelligence' => 1, 'logique' => 1, 'volonte' => 2, 'chance' => 1, 'initiative' => 0),
+        'minimums' => array('constitution' => 2, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intelligence' => 1, 'logique' => 1, 'volonte' => 2, 'chance' => 1, 'initiative' => 0),
+        'maximums' => array('constitution' => 7, 'agilite' => 6, 'reaction' => 5, 'force' => 8, 'charisme' => 6, 'intelligence' => 6, 'logique' => 6, 'volonte' => 7, 'chance' => 10, 'initiative' => 0));
+      break;
+
+    case 'Elfe':
+      $points_disponibles = $totaux_points - 30;
+      $points_attributs = array(
+        'actuels' => array('constitution' => 1, 'agilite' => 2, 'reaction' => 1, 'force' => 1, 'charisme' => 3, 'intelligence' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0),
+        'minimums' => array('constitution' => 1, 'agilite' => 2, 'reaction' => 1, 'force' => 1, 'charisme' => 3, 'intelligence' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0),
+        'maximums' => array('constitution' => 6, 'agilite' => 7, 'reaction' => 6, 'force' => 6, 'charisme' => 8, 'intelligence' => 6, 'logique' => 6, 'volonte' => 6, 'chance' => 10, 'initiative' => 0));
+      break;
+
+    case 'Troll':
+      $points_disponibles = $totaux_points - 40;
+      $points_attributs = array(
+        'actuels' => array('constitution' => 5, 'agilite' => 1, 'reaction' => 1, 'force' => 5, 'charisme' => 1, 'intelligence' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0),
+        'minimums' => array('constitution' => 5, 'agilite' => 1, 'reaction' => 1, 'force' => 5, 'charisme' => 1, 'intelligence' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0),
+        'maximums' => array('constitution' => 10, 'agilite' => 5, 'reaction' => 6, 'force' => 10, 'charisme' => 4, 'intelligence' => 5, 'logique' => 5, 'volonte' => 6, 'chance' => 10, 'initiative' => 0));
+      break;
+    
+    default:
+      $points_disponibles = $totaux_points;
+      $points_attributs = array(
+        'actuels' => array('constitution' => 1, 'agilite' => 1, 'reaction' => 1, 'force' => 1, 'charisme' => 1, 'intelligence' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 2, 'initiative' => 0),
+        'minimums' => array('constitution' => 1, 'agilite' => 1, 'reaction' => 1, 'force' => 1, 'charisme' => 1, 'intelligence' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 2, 'initiative' => 0),
+        'maximums' => array('constitution' => 6, 'agilite' => 6, 'reaction' => 6, 'force' => 6, 'charisme' => 6, 'intelligence' => 6, 'logique' => 6, 'volonte' => 6, 'chance' => 10, 'initiative' => 0));
+      break;
+  }
+}
 
 ?>
-
+    </div>
  	</body>
 </html>
