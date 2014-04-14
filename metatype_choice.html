@@ -10,6 +10,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="js/jquery-1.11.0.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,6 +34,33 @@
       </div>
     </div>
     <!-- Fin de la barre de navigation -->
+
+    <script type="text/javascript">//<![CDATA[
+      $(window).load(function(){
+        function GetNomMetatype(option) {
+          switch (option) {
+            case "Humain":
+              return "<h3 style='text-align:center; margin-top:0px' id='nom-metatype'>Humain</h3><p style='text-align:center'><em>Homo sapiens sapiens</em></p><p>Les humains représentent toujours la majorité de la population mondiale, en moyenne. La plupart mesure environ 1m75 et pèsent à peine moins de 80kg. Soixante ans après l'Eveil, les humains sont toujours perçus comme la norme par les profanes et les organisations scientifiques, et sont toujours le mètre-étalon auquel sont comparés les autres métatypes.</p><table class='table table-striped'><tr><th>Constitution</th><th>Agilité</th><th>Réaction</th><th>Force</th><th>Charisme</th><th>Intuition</th><th>Logique</th><th>Volonté</th></tr><tr><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td></table><p><strong>Avantages :</strong></p><ul><li>Chance +1</li></ul>";
+            case "Ork":
+              return "<h3 style='text-align:center; margin-top:0px' id='nom-metatype'>Ork</h3>";
+          }
+        }
+ 
+      var output = $("#metatype-panel");
+ 
+      $('#choix-metatype').change(function(){
+        var state = this.value;
+        if(state !== "") {
+          var resultArray;
+          output.empty(); // clear the div
+          result = GetNomMetatype(state);
+          $(result).appendTo(output);
+        }
+      return false;
+      });
+      });//]]> 
+    </script>
+
     <div class="container" style="padding-top: 60px;">
       <div class = "jumbotron" style="text-align:center;">
         <h1>Choisissez un méta-type</h1>
@@ -42,20 +70,20 @@
           <form role="form-metaype">
             <div class="form-group">
               <label for="metatype">Métatype</label>
-              <select class="form-control input-lg" id="metatype">
-                <option>Humain</option>
-                <option>Ork</option>
-                <option>Nain</option>
-                <option>Elfe</option>
-                <option>Troll</option>
+              <select class="form-control input-lg" id="choix-metatype" onChange="changeNomMetatype();">
+                <option value="Humain">Humain</option>
+                <option value="Ork">Ork</option>
+                <option value="Nain">Nain</option>
+                <option value="Elfe">Elfe</option>
+                <option value="Troll">Troll</option>
               </select>
             </div>
             <p style="text-align:center;"><button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Valider</button></p>
           </form>
           <!-- Fin du formulaire -->
         </div>
-        <div class="col-md-8">
-          <h3 style="text-align:center; margin-top:0px">Humain</h3>
+        <div class="col-md-8" id="metatype-panel">
+          <h3 style="text-align:center; margin-top:0px" id="nom-metatype">Humain</h3>
           <p style="text-align:center"><em>Homo sapiens sapiens</em></p>
           <p>Les humains représentent toujours la majorité de la population mondiale, en moyenne. La plupart mesure environ 1m75 et pèsent à peine moins de 80kg. Soixante ans après l'Eveil, les humains sont toujours perçus comme "la norme" par les profanes et les organisations scientifiques, et sont toujours le mètre-étalon auquel sont comparés les autres métatypes.</p>
           <table class="table table-striped">
