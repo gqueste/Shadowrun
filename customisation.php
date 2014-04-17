@@ -35,7 +35,7 @@
     	</div>
     	<!-- Fin de la barre de navigation -->
 
-      <div class="container" style="padding-top: 60px;">
+      <div class="container" style="padding-top: 60px;" style='text-align:center;'>
         <h1 style="text-align:center;">Répartissez vos points</h1>	
 
 <?php
@@ -102,6 +102,29 @@ function init() {
 }
 
 ?>
+
+  <div id='caracteristiques'>
+    <h3>Caractéristiques</h3>
+    <table class="table table-bordered" style='text-align:center;'>
+      <tr><th style='text-align:center;'>Constitution</th><th style='text-align:center;'>Agilité</th><th style='text-align:center;'>Réaction</th><th style='text-align:center;'>Force</th><th style='text-align:center;'>Charisme</th><th style='text-align:center;'>Intuition</th><th style='text-align:center;'>Logique</th><th style='text-align:center;'>Volonté</th></tr>
+      <tr>
+        <td style='width:210px'>
+          <div class="input-group" style='width:200px'>
+            <input class="form-control" id='edit-Constitution' type='number' min='' max ='' value='5' readonly size='2' style='text-align:center;'>
+            <div class="input-group-btn">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </td>
+        <td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td><td>1 / 6</td>
+    </table>
+  </div>
+
     </div>
  	</body>
 </html>
