@@ -132,8 +132,8 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
   switch ($caracteristique_en_cours) {
     case 'initiative':
       $calcul_initiative = $points_attributs['actuels']['reaction'] + $points_attributs['actuels']['intuition']; 
-      echo "<td style='width:85px'>
-          <div class='input-group input-group-sm' style='width:75px'>
+      echo "<td style='width:120px'>
+          <div class='input-group input-group-sm' style='width:110px'>
             <input class='form-control' id='edit-".$caracteristique_en_cours."' type='number' value='".$calcul_initiative."' readonly size='2' style='text-align:center;'>
           </div>
         </td>";
@@ -145,7 +145,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
             <input class='form-control' id='edit-".$caracteristique_en_cours."' type='number' min='".$points_attributs['minimums'][$caracteristique_en_cours]."' max ='".$points_attributs['maximums'][$caracteristique_en_cours]."' value='".$points_attributs['actuels'][$caracteristique_en_cours]."' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
-                <button id='plus-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac' type='button' ";
+                <button id='plus-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac buttonCaracPlus' type='button' ";
       if ($caracteristique_en_cours == 'magie') {
         echo 'disabled';
       }
@@ -154,7 +154,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
                 </button>
               </span>
               <span class='input-group-btn'>
-                <button id='moins-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac' type='button' disabled>
+                <button id='moins-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac buttonCaracMoins' type='button' disabled>
                   <span class='glyphicon glyphicon-chevron-down'></span>
                 </button>
               </span>
@@ -178,6 +178,47 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
     function updateTableauCaracteristiques(){
       var valInitiative = parseInt($('#edit-reaction').val()) + parseInt($('#edit-intuition').val());
       $('#edit-initiative').val(valInitiative);
+
+
+      var array_caracs = new Array('constitution', 'agilite', 'reaction', 'force', 'charisme', 'intuition', 'logique', 'volonte', 'chance', 'magie');
+      var pointsTotaux = parseInt($('#titre-points-disponibles').attr('value'));
+      var pointsCarac = parseInt($('#titre-caracteristiques').attr('value'));
+      if(((pointsTotaux - 25) < 0) || ((pointsCarac - 25) < 0)) {
+        if(((pointsTotaux - 10) < 0) || ((pointsCarac - 10) < 0)) {
+          $('.buttonCaracPlus').prop('disabled', true);
+        }
+        else {
+          //disable tous les + qui sont à -1 de leur maximum
+          for (var i = 0; i < array_caracs.length; i++) {
+            var editCarac = '#edit-' + array_caracs[i];
+            var valeurCourante = parseInt($(editCarac).val());
+            var valeurMax = parseInt($(editCarac).attr('max'));
+            if((valeurCourante + 1) == valeurMax) {
+              var plusButton = '#plus-' + array_caracs[i];
+              $(plusButton).prop('disabled', true);  
+            }
+            else if(((valeurCourante) != valeurMax) && (array_caracs[i] != 'magie')) {
+              var plusButton = '#plus-' + array_caracs[i];
+              $(plusButton).prop('disabled', false);  
+            } 
+          }
+        }
+      }
+      else {
+        //enable tous les + sauf ceux qui sont à leur maximum (magie ?)
+        for (var i = 0; i < array_caracs.length; i++) {
+          var editCarac = '#edit-' + array_caracs[i];
+          var valeurCourante = parseInt($(editCarac).val());
+          var valeurMax = parseInt($(editCarac).attr('max'));
+          if(((valeurCourante) != valeurMax) && (array_caracs[i] != 'magie')) {
+            var plusButton = '#plus-' + array_caracs[i];
+            $(plusButton).prop('disabled', false);  
+          }
+        }
+      }
+
+
+
       updateAffichagePoints();
     }
 
@@ -212,6 +253,35 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
       updateTableauCaracteristiques();
     }
 
+    function baisseCarac(carac) {
+      var editVise = '#edit-'+carac;
+      var valeurCourante = parseInt($(editVise).val());
+      var valeurMax = parseInt($(editVise).attr('max'));
+      var valeurMini = parseInt($(editVise).attr('min'));
+      var pointsTotaux = parseInt($('#titre-points-disponibles').attr('value'));
+      var pointsCarac = parseInt($('#titre-caracteristiques').attr('value'));
+      if(valeurCourante == valeurMax) {
+        var nouveauPointsTotal = pointsTotaux + 25;
+        var nouveauPointsCarac = pointsCarac + 25;
+        $('#titre-caracteristiques').attr('value',nouveauPointsCarac);
+        $('#titre-points-disponibles').attr('value',nouveauPointsTotal);
+        var plusButton = '#plus-'+carac;
+        $(plusButton).prop('disabled', false);
+      }
+      else {
+        var nouveauPointsTotal = pointsTotaux + 10;
+        var nouveauPointsCarac = pointsCarac + 10;
+        $('#titre-caracteristiques').attr('value',nouveauPointsCarac);
+        $('#titre-points-disponibles').attr('value',nouveauPointsTotal);
+        if((valeurCourante - 1) == valeurMini) {
+          var moinsButton = '#moins-'+carac;
+          $(moinsButton).prop('disabled', true);  
+        }
+      }
+      $(editVise).val(valeurCourante - 1);
+      updateTableauCaracteristiques();
+    }
+
     $('.buttonCarac').click(function(event){
       var arrayDecompo = event.target.id.split("-");
       var operationFaite = arrayDecompo[0];
@@ -219,10 +289,10 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
       if(operationFaite == 'plus') {
         augmenteCarac(caracVisee);
       }
-
-      //$('#titre-caracteristiques').html("Opération "+operationFaite+" pour "+caracVisee);
+      else {
+        baisseCarac(caracVisee);
+      }
     });
-
   });//]]> 
 </script>
 
