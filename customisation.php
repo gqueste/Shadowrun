@@ -48,7 +48,7 @@ $points_attributs;
 init();
 
 echo "<h2 style='text-align:center;'>".$_POST['choix-metatype']."</h2>
-      <h3 style='text-align:center;'>Nombre de points disponibles : ".$points_disponibles."</h2>";
+      <h3 id='titre-points-disponibles' style='text-align:center;' value='".$points_disponibles."'>Nombre de points disponibles : ".$points_disponibles."</h2>";
 
 echo"<div id='caracteristiques'>
     <h3 id='titre-caracteristiques' value='".$points_caracteristiques."'>Caractéristiques : ".$points_caracteristiques." Points disponibles</h3>
@@ -80,9 +80,9 @@ function init() {
   $points_caracteristiques = $totaux_points / 2;
   $points_disponibles = 0;
   $points_attributs = array(
-  'actuels' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0),
-  'minimums' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0),
-  'maximums' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0));
+    'actuels' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0),
+    'minimums' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0),
+    'maximums' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0));
 
   switch ($_POST['choix-metatype']) {
     case 'Ork':
@@ -145,7 +145,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
             <input class='form-control' id='edit-".$caracteristique_en_cours."' type='number' min='".$points_attributs['minimums'][$caracteristique_en_cours]."' max ='".$points_attributs['maximums'][$caracteristique_en_cours]."' value='".$points_attributs['actuels'][$caracteristique_en_cours]."' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
-                <button id='plus-".$caracteristique_en_cours."' class='btn btn-default btn-sm' type='button' ";
+                <button id='plus-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac' type='button' ";
       if ($caracteristique_en_cours == 'magie') {
         echo 'disabled';
       }
@@ -154,7 +154,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
                 </button>
               </span>
               <span class='input-group-btn'>
-                <button id='moins-".$caracteristique_en_cours."' class='btn btn-default btn-sm' type='button' disabled>
+                <button id='moins-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac' type='button' disabled>
                   <span class='glyphicon glyphicon-chevron-down'></span>
                 </button>
               </span>
@@ -166,6 +166,65 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
 }
 
 ?>
+
+<script type="text/javascript">//<![CDATA[
+  $(window).load(function(){
+
+    function updateAffichagePoints(){
+      $('#titre-caracteristiques').html("Caractéristiques : " + $('#titre-caracteristiques').attr('value') + " Points disponibles");
+      $('#titre-points-disponibles').html("Nombre de points disponibles : " + $('#titre-points-disponibles').attr('value'));
+    }
+
+    function updateTableauCaracteristiques(){
+      var valInitiative = parseInt($('#edit-reaction').val()) + parseInt($('#edit-intuition').val());
+      $('#edit-initiative').val(valInitiative);
+      updateAffichagePoints();
+    }
+
+    function augmenteCarac(carac){
+      var editVise = '#edit-'+carac;
+      var valeurCourante = parseInt($(editVise).val());
+      var valeurMax = parseInt($(editVise).attr('max'));
+      var pointsTotaux = parseInt($('#titre-points-disponibles').attr('value'));
+      var pointsCarac = parseInt($('#titre-caracteristiques').attr('value'));
+      if((valeurCourante + 1) == valeurMax) { //A atteint max
+        if(((pointsCarac - 25) >= 0) && (pointsTotaux - 25 >= 0)) {
+          var nouveauPointsTotal = pointsTotaux - 25;
+          var nouveauPointsCarac = pointsCarac - 25;
+          $('#titre-caracteristiques').attr('value',nouveauPointsCarac);
+          $('#titre-points-disponibles').attr('value',nouveauPointsTotal);
+          $(editVise).val(valeurCourante + 1);
+          var plusButton = '#plus-'+carac;
+          $(plusButton).prop('disabled', true);
+        }
+      }
+      else {
+        if(((pointsCarac - 10) >= 0) && (pointsTotaux - 10 >= 0)) {
+          var nouveauPointsTotal = pointsTotaux - 10;
+          var nouveauPointsCarac = pointsCarac - 10;
+          $('#titre-caracteristiques').attr('value',nouveauPointsCarac);
+          $('#titre-points-disponibles').attr('value',nouveauPointsTotal);
+          $(editVise).val(valeurCourante + 1);
+          var moinsButton = '#moins-'+carac;
+          $(moinsButton).prop('disabled', false);
+        }
+      }
+      updateTableauCaracteristiques();
+    }
+
+    $('.buttonCarac').click(function(event){
+      var arrayDecompo = event.target.id.split("-");
+      var operationFaite = arrayDecompo[0];
+      var caracVisee = arrayDecompo[1];
+      if(operationFaite == 'plus') {
+        augmenteCarac(caracVisee);
+      }
+
+      //$('#titre-caracteristiques').html("Opération "+operationFaite+" pour "+caracVisee);
+    });
+
+  });//]]> 
+</script>
 
       </tr>
     </table>
