@@ -54,17 +54,17 @@ echo"<div id='caracteristiques'>
     <h3 id='titre-caracteristiques' value='".$points_caracteristiques."'>Caractéristiques : ".$points_caracteristiques." Points disponibles</h3>
     <table class='table table-bordered' style='text-align:center;'>
       <tr>
-        <th style='text-align:center;'>Constitution</th>
-        <th style='text-align:center;'>Agilité</th>
-        <th style='text-align:center;'>Réaction</th>
-        <th style='text-align:center;'>Force</th>
-        <th style='text-align:center;'>Charisme</th>
-        <th style='text-align:center;'>Intuition</th>
-        <th style='text-align:center;'>Logique</th>
-        <th style='text-align:center;'>Volonté</th>
-        <th style='text-align:center;'>Chance</th>
-        <th style='text-align:center;'>Initiative</th>
-        <th style='text-align:center;'>Magie</th>
+        <th style='text-align:center;' class='Carac' id='titre-constitution'>Constitution</th>
+        <th style='text-align:center;' class='Carac' id='titre-agilite'>Agilité</th>
+        <th style='text-align:center;' class='Carac' id='titre-reaction'>Réaction</th>
+        <th style='text-align:center;' class='Carac' id='titre-force'>Force</th>
+        <th style='text-align:center;' class='Carac' id='titre-charisme'>Charisme</th>
+        <th style='text-align:center;' class='Carac' id='titre-intuition'>Intuition</th>
+        <th style='text-align:center;' class='Carac' id='titre-logique'>Logique</th>
+        <th style='text-align:center;' class='Carac' id='titre-volonte'>Volonté</th>
+        <th style='text-align:center;' class='Carac' id='titre-chance'>Chance</th>
+        <th style='text-align:center;' class='Carac' id='titre-initiative'>Initiative</th>
+        <th style='text-align:center;' class='Carac' id='titre-magie'>Magie</th>
       </tr>
       <tr>";
 
@@ -132,7 +132,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
   switch ($caracteristique_en_cours) {
     case 'initiative':
       $calcul_initiative = $points_attributs['actuels']['reaction'] + $points_attributs['actuels']['intuition']; 
-      echo "<td style='width:120px'>
+      echo "<td style='width:120px' class='Carac' id='choix-".$caracteristique_en_cours."'>
           <div class='input-group input-group-sm' style='width:110px'>
             <input class='form-control' id='edit-".$caracteristique_en_cours."' type='number' value='".$calcul_initiative."' readonly size='2' style='text-align:center;'>
           </div>
@@ -140,7 +140,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
       break;
     
     default:
-      echo "<td style='width:120px'>
+      echo "<td style='width:120px' class='Carac' id='choix-".$caracteristique_en_cours."'>
           <div class='input-group input-group-sm' style='width:110px'>
             <input class='form-control' id='edit-".$caracteristique_en_cours."' type='number' min='".$points_attributs['minimums'][$caracteristique_en_cours]."' max ='".$points_attributs['maximums'][$caracteristique_en_cours]."' value='".$points_attributs['actuels'][$caracteristique_en_cours]."' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
@@ -222,9 +222,6 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
           }
         }
       }
-
-
-
       updateAffichagePoints();
     }
 
@@ -299,11 +296,67 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
         baisseCarac(caracVisee);
       }
     });
+
+
+    $('.Carac').hover(function() {
+      var elementHovered = this.id;
+      var arrayDecompo = elementHovered.split("-");
+      var elem = arrayDecompo[1];
+      var description;
+      switch(elem) {
+        case 'constitution':
+        break;
+
+        case 'agilite':
+        break;
+
+        case 'reaction':
+        break;
+
+        case 'force':
+        break;
+
+        case 'charisme':
+        break;
+
+        case 'intuition':
+        break;
+
+        case 'logique':
+        break;
+
+        case 'volonte':
+        break;
+
+        case 'chance':
+        break;
+
+        case 'initiative':
+        break;
+
+        case 'magie':
+        break;
+
+        default:
+        break;
+      }
+      $('#description-carac').html(elem);
+    });
+
   });//]]> 
 </script>
 
       </tr>
     </table>
+    <div class="col-md-5">
+      <h3>Améliorer ses caractéristiques</h3>
+      <ul>
+        <li>1 Niveau = 10 Points</li>
+        <li>Monter une caractéristique à son maximum = 25 Points</li>
+      </ul>
+    </div>
+    <div class="col-md-7" id='description-carac'>
+    </div>
   </div>
 
     </div>
