@@ -171,7 +171,13 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
   $(window).load(function(){
 
     function updateAffichagePoints(){
-      $('#titre-caracteristiques').html("Caractéristiques : " + $('#titre-caracteristiques').attr('value') + " Points disponibles");
+      var points_carac = parseInt($('#titre-caracteristiques').attr('value'));
+      if(points_carac == 0) {
+        $('#titre-caracteristiques').html("Caractéristiques : " + points_carac + " Point disponible");  
+      }
+      else {
+        $('#titre-caracteristiques').html("Caractéristiques : " + points_carac + " Points disponibles");  
+      }
       $('#titre-points-disponibles').html("Nombre de points disponibles : " + $('#titre-points-disponibles').attr('value'));
     }
 
@@ -197,7 +203,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
               var plusButton = '#plus-' + array_caracs[i];
               $(plusButton).prop('disabled', true);  
             }
-            else if(((valeurCourante) != valeurMax) && (array_caracs[i] != 'magie')) {
+            else if(((valeurCourante) != valeurMax) && (array_caracs[i] != 'magie')) {     //ATTENTION A GESTION MAGIE
               var plusButton = '#plus-' + array_caracs[i];
               $(plusButton).prop('disabled', false);  
             } 
