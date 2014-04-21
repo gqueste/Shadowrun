@@ -231,7 +231,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
     
     default:
       echo "<td style='width:120px' class='Carac' id='choix-".$caracteristique_en_cours."'>
-          <div class='input-group input-group-sm' style='width:110px'>
+          <div class='input-group input-group-sm' style='width:117px'>
             <input class='form-control' id='edit-".$caracteristique_en_cours."' type='number' min='".$points_attributs['minimums'][$caracteristique_en_cours]."' max ='".$points_attributs['maximums'][$caracteristique_en_cours]."' value='".$points_attributs['actuels'][$caracteristique_en_cours]."' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
