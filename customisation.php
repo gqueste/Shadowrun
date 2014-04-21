@@ -235,7 +235,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
             <input class='form-control' id='edit-".$caracteristique_en_cours."' type='number' min='".$points_attributs['minimums'][$caracteristique_en_cours]."' max ='".$points_attributs['maximums'][$caracteristique_en_cours]."' value='".$points_attributs['actuels'][$caracteristique_en_cours]."' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
-                <button id='plus-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac buttonCaracPlus' type='button' ";
+                <button id='plus-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac buttonCaracPlus' type='button' onclick='' style='cursor:pointer'";
       if ($caracteristique_en_cours == 'magie') {
         echo 'disabled';
       }
@@ -244,7 +244,7 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
                 </button>
               </span>
               <span class='input-group-btn'>
-                <button id='moins-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac buttonCaracMoins' type='button' disabled>
+                <button id='moins-".$caracteristique_en_cours."' class='btn btn-default btn-sm buttonCarac buttonCaracMoins' type='button' onclick='' disabled>
                   <span class='glyphicon glyphicon-chevron-down'></span>
                 </button>
               </span>
@@ -272,12 +272,12 @@ function caseTableauTraitsAvantages($trait) {
             <input class='form-control' id='edit-avantage-".$trait."' type='number' min='0' max ='".$traits_avantages[$trait]['points_max']."' value='0' readonly size='1'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
-                <button id='plus-avantage-".$trait."' class='btn btn-default btn-sm buttonTraitAvantage buttonTraitAvantagePlus' type='button'>
+                <button id='plus-avantage-".$trait."' class='btn btn-default btn-sm buttonTraitAvantage buttonTraitAvantagePlus' type='button' onclick=''>
                   <span class='glyphicon glyphicon-chevron-up'></span>
                 </button>
               </span>
               <span class='input-group-btn'>
-                <button id='moins-avantage-".$trait."' class='btn btn-default btn-sm buttonTraitAvantage buttonTraitAvantageMoins' type='button' disabled>
+                <button id='moins-avantage-".$trait."' class='btn btn-default btn-sm buttonTraitAvantage buttonTraitAvantageMoins' type='button' onclick='' disabled>
                   <span class='glyphicon glyphicon-chevron-down'></span>
                 </button>
               </span>
@@ -410,7 +410,7 @@ function caseTableauTraitsAvantages($trait) {
     }
 
     $('.buttonCarac').click(function(event){
-      var arrayDecompo = event.target.id.split("-");
+      var arrayDecompo = jQuery(this).attr("id").split("-");
       var operationFaite = arrayDecompo[0];
       var caracVisee = arrayDecompo[1];
       if(operationFaite == 'plus') {
