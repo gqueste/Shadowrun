@@ -44,6 +44,8 @@ $totaux_points;
 $points_caracteristiques;
 $points_disponibles;
 $points_attributs;
+$traits_avantages;
+$traits_defauts;
 
 init();
 
@@ -75,56 +77,110 @@ foreach ($tab_caracs as $carac) {
 
 
 function init() {
-  global $totaux_points, $points_disponibles, $points_attributs, $points_caracteristiques;
+  global $totaux_points, $points_disponibles, $points_attributs, $points_caracteristiques, $traits_avantages, $traits_defauts;
   $totaux_points = 400;
   $points_caracteristiques = $totaux_points / 2;
   $points_disponibles = 0;
   $points_attributs = array(
-    'actuels' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0),
-    'minimums' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0),
-    'maximums' => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0));
+    'actuels'   => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0),
+    'minimums'  => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0),
+    'maximums'  => array('constitution' => 0, 'agilite' => 0, 'reaction' => 0, 'force' => 0, 'charisme' => 0, 'intuition' => 0, 'logique' => 0, 'volonte' => 0, 'chance' => 0, 'initiative' => 0, 'magie' => 0));
 
   switch ($_POST['choix-metatype']) {
     case 'Ork':
       $points_disponibles = $totaux_points - 20;
       $points_attributs = array(
-        'actuels' => array('constitution' => 4, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
-        'minimums' => array('constitution' => 4, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
-        'maximums' => array('constitution' => 9, 'agilite' => 6, 'reaction' => 6, 'force' => 8, 'charisme' => 5, 'intuition' => 6, 'logique' => 5, 'volonte' => 6, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
+        'actuels'   => array('constitution' => 4, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
+        'minimums'  => array('constitution' => 4, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
+        'maximums'  => array('constitution' => 9, 'agilite' => 6, 'reaction' => 6, 'force' => 8, 'charisme' => 5, 'intuition' => 6, 'logique' => 5, 'volonte' => 6, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
       break;
 
     case 'Nain':
       $points_disponibles = $totaux_points - 25;
       $points_attributs = array(
-        'actuels' => array('constitution' => 2, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 2, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
-        'minimums' => array('constitution' => 2, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 2, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
-        'maximums' => array('constitution' => 7, 'agilite' => 6, 'reaction' => 5, 'force' => 8, 'charisme' => 6, 'intuition' => 6, 'logique' => 6, 'volonte' => 7, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
+        'actuels'   => array('constitution' => 2, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 2, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
+        'minimums'  => array('constitution' => 2, 'agilite' => 1, 'reaction' => 1, 'force' => 3, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 2, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
+        'maximums'  => array('constitution' => 7, 'agilite' => 6, 'reaction' => 5, 'force' => 8, 'charisme' => 6, 'intuition' => 6, 'logique' => 6, 'volonte' => 7, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
       break;
 
     case 'Elfe':
       $points_disponibles = $totaux_points - 30;
       $points_attributs = array(
-        'actuels' => array('constitution' => 1, 'agilite' => 2, 'reaction' => 1, 'force' => 1, 'charisme' => 3, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
-        'minimums' => array('constitution' => 1, 'agilite' => 2, 'reaction' => 1, 'force' => 1, 'charisme' => 3, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
-        'maximums' => array('constitution' => 6, 'agilite' => 7, 'reaction' => 6, 'force' => 6, 'charisme' => 8, 'intuition' => 6, 'logique' => 6, 'volonte' => 6, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
+        'actuels'   => array('constitution' => 1, 'agilite' => 2, 'reaction' => 1, 'force' => 1, 'charisme' => 3, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
+        'minimums'  => array('constitution' => 1, 'agilite' => 2, 'reaction' => 1, 'force' => 1, 'charisme' => 3, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
+        'maximums'  => array('constitution' => 6, 'agilite' => 7, 'reaction' => 6, 'force' => 6, 'charisme' => 8, 'intuition' => 6, 'logique' => 6, 'volonte' => 6, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
       break;
 
     case 'Troll':
       $points_disponibles = $totaux_points - 40;
       $points_attributs = array(
-        'actuels' => array('constitution' => 5, 'agilite' => 1, 'reaction' => 1, 'force' => 5, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
-        'minimums' => array('constitution' => 5, 'agilite' => 1, 'reaction' => 1, 'force' => 5, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
-        'maximums' => array('constitution' => 10, 'agilite' => 5, 'reaction' => 6, 'force' => 10, 'charisme' => 4, 'intuition' => 5, 'logique' => 5, 'volonte' => 6, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
+        'actuels'   => array('constitution' => 5, 'agilite' => 1, 'reaction' => 1, 'force' => 5, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
+        'minimums'  => array('constitution' => 5, 'agilite' => 1, 'reaction' => 1, 'force' => 5, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 1, 'initiative' => 0, 'magie' => 0),
+        'maximums'  => array('constitution' => 10, 'agilite' => 5, 'reaction' => 6, 'force' => 10, 'charisme' => 4, 'intuition' => 5, 'logique' => 5, 'volonte' => 6, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
       break;
     
     default:
       $points_disponibles = $totaux_points;
       $points_attributs = array(
-        'actuels' => array('constitution' => 1, 'agilite' => 1, 'reaction' => 1, 'force' => 1, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 2, 'initiative' => 0, 'magie' => 0),
-        'minimums' => array('constitution' => 1, 'agilite' => 1, 'reaction' => 1, 'force' => 1, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 2, 'initiative' => 0, 'magie' => 0),
-        'maximums' => array('constitution' => 6, 'agilite' => 6, 'reaction' => 6, 'force' => 6, 'charisme' => 6, 'intuition' => 6, 'logique' => 6, 'volonte' => 6, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
+        'actuels'   => array('constitution' => 1, 'agilite' => 1, 'reaction' => 1, 'force' => 1, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 2, 'initiative' => 0, 'magie' => 0),
+        'minimums'  => array('constitution' => 1, 'agilite' => 1, 'reaction' => 1, 'force' => 1, 'charisme' => 1, 'intuition' => 1, 'logique' => 1, 'volonte' => 1, 'chance' => 2, 'initiative' => 0, 'magie' => 0),
+        'maximums'  => array('constitution' => 6, 'agilite' => 6, 'reaction' => 6, 'force' => 6, 'charisme' => 6, 'intuition' => 6, 'logique' => 6, 'volonte' => 6, 'chance' => 10, 'initiative' => 0, 'magie' => 10));
       break;
   }
+  $traits_avantages = array(
+    'Adepte'                    => array('prix' => 5 , 'points_max' => 1), //CSQ
+    'Adepte mystique'           => array('prix' => 10, 'points_max' => 1), //CSQ
+    'Affinité avec les esprits' => array('prix' => 10, 'points_max' => 1),
+    'Ambidextre'                => array('prix' => 5 , 'points_max' => 1),
+    'Apparence humaine'         => array('prix' => 5 , 'points_max' => 1),
+    'Aptitude'                  => array('prix' => 10, 'points_max' => 1), //CSQ
+    'Attribut exceptionnel'     => array('prix' => 20, 'points_max' => 1), //CSQ
+    'Bon codeur'                => array('prix' => 10, 'points_max' => 1),
+    'Caméléon astral'           => array('prix' => 5 , 'points_max' => 1 ),
+    'Chanceux'                  => array('prix' => 20, 'points_max' => 1),
+    'Concentration accrue'      => array('prix' => 10, 'points_max' => 2),
+    'Contorsionniste'           => array('prix' => 5 , 'points_max' => 1),
+    'Dur à cuire'               => array('prix' => 10, 'points_max' => 1),
+    'Empathie animale'          => array('prix' => 10, 'points_max' => 1),
+    'Endurance à la douleur'    => array('prix' => 5 , 'points_max' => 3),
+    'Esprit mentor'             => array('prix' => 5 , 'points_max' => 1), //CSQ
+    'Guérison rapide'           => array('prix' => 10, 'points_max' => 1),
+    'Immunité naturelle'        => array('prix' => 5 , 'points_max' => 1),
+    'Lien ténu'                 => array('prix' => 10, 'points_max' => 1),
+    'Magicien'                  => array('prix' => 15, 'points_max' => 1), //CSQ
+    'Mémoire photographique'    => array('prix' => 10, 'points_max' => 1),
+    'M. tout le monde'          => array('prix' => 10, 'points_max' => 1),
+    'Première impression'       => array('prix' => 5 , 'points_max' => 1),
+    'Renfort naturel'           => array('prix' => 10, 'points_max' => 1),
+    'Résistance à la mgie'      => array('prix' => 5 , 'points_max' => 4),
+    'Résistance aux toxines'    => array('prix' => 5 , 'points_max' => 2),
+    'Survivant'                 => array('prix' => 5 , 'points_max' => 3),
+    'Technomancien'             => array('prix' => 5 , 'points_max' => 1), //CSQ
+    'Territoire'                => array('prix' => 10, 'points_max' => 1),
+    'Tripes'                    => array('prix' => 5 , 'points_max' => 1),
+    );
+  
+  $traits_defauts = array(
+    'Allergie'                  => array('prix' => 5 , 'points_max' => 4),
+    'Asocial'                   => array('prix' => 20, 'points_max' => 1),
+    'Balise astrale'            => array('prix' => 5 , 'points_max' => 1),
+    'Dépendance'                => array('prix' => 5 , 'points_max' => 6), //csq
+    'Ecorché'                   => array('prix' => 5 , 'points_max' => 1), 
+    'Gremlins'                  => array('prix' => 5 , 'points_max' => 4),
+    'Hostilité des esprits'     => array('prix' => 10, 'points_max' => 1),
+    'Immunodéficience'          => array('prix' => 5 , 'points_max' => 1),
+    'Immunodépression'          => array('prix' => 15, 'points_max' => 1),
+    'Incompétent'               => array('prix' => 5 , 'points_max' => 1), //CSQ
+    'Infirme'                   => array('prix' => 20, 'points_max' => 1),
+    'Malchanceux'               => array('prix' => 20, 'points_max' => 1),
+    'Mal du simsens'            => array('prix' => 10, 'points_max' => 1),
+    'Mauvais codeur'            => array('prix' => 5 , 'points_max' => 1),
+    'Paralysie en combat'       => array('prix' => 20, 'points_max' => 1),
+    'Primitif'                  => array('prix' => 20, 'points_max' => 1),
+    'Sensible à la douleur'     => array('prix' => 10, 'points_max' => 1),
+    'SINner'                    => array('prix' => 5 , 'points_max' => 2),
+    'Système nerveux sensible'  => array('prix' => 5 , 'points_max' => 1),
+    );
 }
 
 function caseTableauCaracteristiques($caracteristique_en_cours) {
