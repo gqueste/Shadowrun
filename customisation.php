@@ -53,7 +53,8 @@ echo "<h2 style='text-align:center;'>".$_POST['choix-metatype']."</h2>
       <h3 id='titre-points-disponibles' style='text-align:center;' value='".$points_disponibles."'>Nombre de points disponibles : ".$points_disponibles."</h2>";
 
 echo"<div id='caracteristiques'>
-    <h3 id='titre-caracteristiques' value='".$points_caracteristiques."'>Caractéristiques : ".$points_caracteristiques." Points disponibles</h3>
+    <h2>Caractéristiques</h2>
+    <h3 id='titre-caracteristiques' value='".$points_caracteristiques."'>".$points_caracteristiques." Points disponibles</h3>
     <table class='table table-bordered' style='text-align:center;'>
       <tr>
         <th style='text-align:center;' class='Carac' id='titre-constitution'>Constitution</th>
@@ -73,6 +74,39 @@ echo"<div id='caracteristiques'>
 $tab_caracs = array_keys($points_attributs['actuels']);
 foreach ($tab_caracs as $carac) {
   caseTableauCaracteristiques($carac);
+}
+echo "    </tr>
+    </table>
+    <div class='col-md-5'>
+      <h3>Améliorer ses caractéristiques</h3>
+      <ul>
+        <li>1 Niveau = 10 Points</li>
+        <li>Monter une caractéristique à son maximum = 25 Points</li>
+      </ul>
+    </div>
+    <div class='col-md-7' id='description-carac'>
+      <h3>Constitution</h3>
+      <p>La Constitution détermine la résistance d'un personnage face aux facteurs externes. Cet attribut représente l'endurance et la capacité cardio-vasculaire du personnage, son systême immunitaire, ses facultés de cicatrisation et de guérison, l'aptitude que possède son corps à s'ajuster au bioware, sa tolérance à l'alcool et aux drogues, et aussi, d'une certaine manière, sa structure musculaire et osseuse, ainsi que son poids. Une Constitution faible peut signifier qu'un personnage est maigre, chétif, ou qu'il a de mauvaises habitudes alimentaires ou sanitaires. Un personnage sortant d'une grave maladie ou d'une grosse opération de cyberchirurgie peut aussi être affligé d'une faible Constitution. Une Constitution élevée, au contraire, signifie que le personnage est bien alimenté, solide comme un roc, possède des os résistants et un systeme immunitaire fiable. La Constitution n'est pas nécessairement proportionnelle à la taille physique : un personnage gros ou obèse a probablement une faible Constitution, mais un petit personnage qui est filiforme et athlétique peut avoir une Constitution élevée.</p>  
+    </div>
+  </div>";
+
+echo "<div>
+        <h2>Traits</h2>
+        <h3 id='avantages' value='0'>Avantages : 0 PC</h3>
+        <div class='col-md-5'>
+          <table class='table table-hover'>
+            <thead>
+              <tr>
+                <th>Avantage</th>
+                <th>Coût (points max)</th>
+                <th>Sélection</th>
+              </tr>
+            </thead>
+            <tbody>";
+
+$tab_avantages = array_keys($traits_avantages);
+foreach ($tab_avantages as $trait) {
+  caseTableauTraitsAvantages($trait);
 }
 
 
@@ -152,7 +186,7 @@ function init() {
     'M. tout le monde'          => array('prix' => 10, 'points_max' => 1),
     'Première impression'       => array('prix' => 5 , 'points_max' => 1),
     'Renfort naturel'           => array('prix' => 10, 'points_max' => 1),
-    'Résistance à la mgie'      => array('prix' => 5 , 'points_max' => 4),
+    'Résistance à la magie'     => array('prix' => 5 , 'points_max' => 4),
     'Résistance aux toxines'    => array('prix' => 5 , 'points_max' => 2),
     'Survivant'                 => array('prix' => 5 , 'points_max' => 3),
     'Technomancien'             => array('prix' => 5 , 'points_max' => 1), //CSQ
@@ -221,6 +255,40 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
   }
 }
 
+function caseTableauTraitsAvantages($trait) {
+  global $traits_avantages;
+  echo" <tr>
+          <td>".$trait."</td>";
+          
+  if($traits_avantages[$trait]['points_max'] == 1) {
+    echo "<td>".$traits_avantages[$trait]['prix']."</td>
+          <td>
+          <input id='checkbox-avantage-".$trait."' type='checkbox'>";
+  }
+  else {
+    echo "<td>".$traits_avantages[$trait]['prix']." (".$traits_avantages[$trait]['points_max'].")</td>
+          <td>
+          <div class='input-group input-group-sm' style='width:110px'>
+            <input class='form-control' id='edit-avantage-".$trait."' type='number' min='0' max ='".$traits_avantages[$trait]['points_max']."' value='0' readonly size='1'>
+            <div class='input-group-btn'>
+              <span class='input-group-btn'>
+                <button id='plus-avantage-".$trait."' class='btn btn-default btn-sm buttonTraitAvantage buttonTraitAvantagePlus' type='button'>
+                  <span class='glyphicon glyphicon-chevron-up'></span>
+                </button>
+              </span>
+              <span class='input-group-btn'>
+                <button id='moins-avantage-".$trait."' class='btn btn-default btn-sm buttonTraitAvantage buttonTraitAvantageMoins' type='button' disabled>
+                  <span class='glyphicon glyphicon-chevron-down'></span>
+                </button>
+              </span>
+            </div>
+          </div>";
+
+  }
+  echo "</td>
+        </tr>";
+}
+
 ?>
 
 <script type="text/javascript">//<![CDATA[
@@ -228,11 +296,11 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
 
     function updateAffichagePoints(){
       var points_carac = parseInt($('#titre-caracteristiques').attr('value'));
-      if(points_carac == 0) {
-        $('#titre-caracteristiques').html("Caractéristiques : " + points_carac + " Point disponible");  
+      if(points_carac == 0 || points_carac == 1) {
+        $('#titre-caracteristiques').html(points_carac + " Point disponible");  
       }
       else {
-        $('#titre-caracteristiques').html("Caractéristiques : " + points_carac + " Points disponibles");  
+        $('#titre-caracteristiques').html(points_carac + " Points disponibles");  
       }
       $('#titre-points-disponibles').html("Nombre de points disponibles : " + $('#titre-points-disponibles').attr('value'));
     }
@@ -407,24 +475,19 @@ function caseTableauCaracteristiques($caracteristique_en_cours) {
         default:
         break;
       }
-    }, function(){
-      $('#description-carac').html("");
     });
 
   });//]]> 
 </script>
 
-      </tr>
+  
+      </tbody>
     </table>
-    <div class="col-md-5">
-      <h3>Améliorer ses caractéristiques</h3>
-      <ul>
-        <li>1 Niveau = 10 Points</li>
-        <li>Monter une caractéristique à son maximum = 25 Points</li>
-      </ul>
-    </div>
-    <div class="col-md-7" id='description-carac'>
-    </div>
+  </div>
+
+  <div class='col-md-7'>
+  </div>
+  
   </div>
 
     </div>
