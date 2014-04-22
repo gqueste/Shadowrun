@@ -305,15 +305,16 @@ function caseTableauTraits($trait, $type) {
     echo "<td>".$array_trait[$trait]['prix']." (".$array_trait[$trait]['points_max'].")</td>
           <td>
           <div class='input-group input-group-sm' style='width:110px'>
-            <input class='form-control' id='edit-".$type."-".$name."' type='number' min='0' max ='".$array_trait[$trait]['points_max']."' value='0' readonly size='1'>
+            <input class='form-control' id='edit-".$type."-".$name."' type='number' min='0' max='".$array_trait[$trait]['points_max']."' value='0' readonly size='1'>
+            <input type='hidden' id='edit-".$type."-".$name."-prix' value='".$array_trait[$trait]['prix']."'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
-                <button id='plus-".$type."-".$name."' class='btn btn-default btn-sm buttonTrait".$type." buttonTrait".$type."Plus' type='button' onclick=''>
+                <button id='plus-".$type."-".$name."' class='btn btn-default btn-sm buttonTrait buttonTrait".$type." buttonTrait".$type."Plus' type='button' onclick=''>
                   <span class='glyphicon glyphicon-chevron-up'></span>
                 </button>
               </span>
               <span class='input-group-btn'>
-                <button id='moins-".$type."-".$name."' class='btn btn-default btn-sm buttonTrait".$type." buttonTrait".$type."Moins' type='button' onclick='' disabled>
+                <button id='moins-".$type."-".$name."' class='btn btn-default btn-sm buttonTrait buttonTrait".$type." buttonTrait".$type."Moins' type='button' onclick='' disabled>
                   <span class='glyphicon glyphicon-chevron-down'></span>
                 </button>
               </span>

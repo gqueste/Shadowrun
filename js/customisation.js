@@ -280,6 +280,46 @@ $(window).load(function(){
     }
   });
 
+  function changeTrait(operation, typeTrait, traitVise) {
+    var editConcerne = '#edit-'+typeTrait+'-'+traitVise;
+    var value = parseInt($(editConcerne).attr('value'));
+    var min = 0;
+    var max = parseInt($(editConcerne).attr('max'));
+    var champHidden = editConcerne + '-prix';
+    var prix = parseInt($(champHidden).attr('value'));
+    if(typeTrait == 'Avantage') {
+      //PENDING
+    }
+    else {
+      //PENDING
+    }
+    var buttonMoins = '#moins-'+typeTrait+'-'+traitVise;
+    var buttonPlus = '#plus-'+typeTrait+'-'+traitVise;
+    if(value == min) {
+      buttonMoins.prop('disabled', true);
+    }
+    else {
+      buttonMoins.prop('disabled', false);
+    }
 
+    if(value == max) {
+      buttonPlus.prop('disabled', true);
+    }
+    else {
+      buttonPlus.prop('disabled', false);
+    }
+
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateAffichagePoints();
+  }
+
+  $('.buttonTrait').click(function(event){
+    var arrayDecompo = jQuery(this).attr("id").split("-");
+    var operationFaite = arrayDecompo[0];
+    var typeTrait = arrayDecompo[1];
+    var traitVise = arrayDecompo[2];
+    changeTrait(operationFaite, typeTrait, traitVise);
+  });
 
 });//]]>
