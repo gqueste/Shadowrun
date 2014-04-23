@@ -10,6 +10,25 @@ $(window).load(function(){
       $('#titre-caracteristiques').html(points_carac + " Points disponibles");  
     }
     $('#titre-points-disponibles').html("Nombre de points disponibles : " + $('#titre-points-disponibles').attr('value'));
+
+    //Block traits Avantages décochés / + si titrePointsDispo.value < aux prix des traits
+    var checkbox_traits_avantages = '.checkboxTraitAvantage';
+    var plus_traits_avantages = '.buttonTraitAvantagePlus';
+
+    $(checkbox_traits_avantages).each(function(){
+      var id = this.id;
+      var checkbox = '#'+id;
+      var nbPoints = parseInt($('#titre-points-disponibles').attr('value'));
+      var valueAvantage = parseInt($(checkbox).attr('value'));
+      if(!$(checkbox).prop('checked')) {
+        if(nbPoints - valueAvantage < 0) {
+          $(checkbox).prop('disabled', true);
+        }
+        else {
+          $(checkbox).prop('disabled', false);
+        }
+      }
+    });
   }
 
   function updateTableauCaracteristiques(){
@@ -330,6 +349,7 @@ $(window).load(function(){
 
     updatePointsAvantage();
     updatePointsDefaut();
+    updateTableauCaracteristiques()
     updateAffichagePoints();
   }
 

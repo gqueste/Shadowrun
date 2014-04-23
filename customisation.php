@@ -210,7 +210,7 @@ function init() {
     'Lien ténu'                 => array('prix' => 10, 'points_max' => 1),
     'Magicien'                  => array('prix' => 15, 'points_max' => 1), //CSQ
     'Mémoire photographique'    => array('prix' => 10, 'points_max' => 1),
-    'M. tout le monde'          => array('prix' => 10, 'points_max' => 1),
+    'M tout le monde'          => array('prix' => 10, 'points_max' => 1),
     'Première impression'       => array('prix' => 5 , 'points_max' => 1),
     'Renfort naturel'           => array('prix' => 10, 'points_max' => 1),
     'Résistance à la magie'     => array('prix' => 5 , 'points_max' => 4),
@@ -299,7 +299,7 @@ function caseTableauTraits($trait, $type) {
   if($array_trait[$trait]['points_max'] == 1) {
     echo "<td>".$array_trait[$trait]['prix']."</td>
           <td>
-          <input id='checkbox-".$type."-".$name."' type='checkbox' class='checkbox checkboxTrait' value='".$array_trait[$trait]['prix']."'>";
+          <input id='checkbox-".$type."-".$name."' type='checkbox' class='checkbox checkboxTrait checkboxTrait".$type."' value='".$array_trait[$trait]['prix']."'>";
   }
   else {
     echo "<td>".$array_trait[$trait]['prix']." (".$array_trait[$trait]['points_max'].")</td>
