@@ -199,21 +199,16 @@ $(window).load(function(){
     var inputID = '#checkbox-Avantage-' + trait;
     var value = parseInt($(inputID).attr('value'));
     var valueAvantages = parseInt($('#avantages').attr('value'));
-    if(bool) {
-      valueAvantages = valueAvantages - value;
-    }
-    else {
-      valueAvantages = valueAvantages + value;
-    }
-    $('#avantages').attr('value', valueAvantages);
-
     var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
     if(bool) {
+      valueAvantages = valueAvantages - value;
       valuePoints = valuePoints - value;
     }
     else {
+      valueAvantages = valueAvantages + value;
       valuePoints = valuePoints + value;
     }
+    $('#avantages').attr('value', valueAvantages);
     $('#titre-points-disponibles').attr('value', valuePoints);
 
     updatePointsAvantage();
@@ -235,21 +230,16 @@ $(window).load(function(){
     var inputID = '#checkbox-Defaut-' + trait;
     var value = parseInt($(inputID).attr('value'));
     var valueDefauts = parseInt($('#defauts').attr('value'));
-    if(bool) {
-      valueDefauts = valueDefauts + value;
-    }
-    else {
-      valueDefauts = valueDefauts - value;
-    }
-    $('#defauts').attr('value', valueDefauts);
-
     var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
     if(bool) {
+      valueDefauts = valueDefauts + value;
       valuePoints = valuePoints + value;
     }
     else {
+      valueDefauts = valueDefauts - value;
       valuePoints = valuePoints - value;
     }
+    $('#defauts').attr('value', valueDefauts);
     $('#titre-points-disponibles').attr('value', valuePoints);
 
     updatePointsDefaut();
@@ -288,25 +278,54 @@ $(window).load(function(){
     var champHidden = editConcerne + '-prix';
     var prix = parseInt($(champHidden).attr('value'));
     if(typeTrait == 'Avantage') {
-      //PENDING
+      var valueAvantages = parseInt($('#avantages').attr('value'));
+      var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
+      if(operation == 'plus') {
+        valueAvantages = valueAvantages - prix;
+        valuePoints = valuePoints - prix;
+        value = value + 1;
+      }
+      else {
+        valueAvantages = valueAvantages + prix;
+        valuePoints = valuePoints + prix;
+        value = value - 1;
+      }
+      $('#avantages').attr('value', valueAvantages);
+      $('#titre-points-disponibles').attr('value', valuePoints);
     }
     else {
-      //PENDING
+      var valueDefauts = parseInt($('#defauts').attr('value'));
+      var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
+      if(operation == 'plus') {
+        valueDefauts = valueDefauts + prix;
+        valuePoints = valuePoints + prix;
+        value = value + 1;
+      }
+      else {
+        valueDefauts = valueDefauts - prix;
+        valuePoints = valuePoints - prix;
+        value = value - 1;
+      }
+      $('#defauts').attr('value', valueDefauts);
+      $('#titre-points-disponibles').attr('value', valuePoints);
     }
+
+    $(editConcerne).attr('value', value);
+
     var buttonMoins = '#moins-'+typeTrait+'-'+traitVise;
     var buttonPlus = '#plus-'+typeTrait+'-'+traitVise;
     if(value == min) {
-      buttonMoins.prop('disabled', true);
+      $(buttonMoins).prop('disabled', true);
     }
     else {
-      buttonMoins.prop('disabled', false);
+      $(buttonMoins).prop('disabled', false);
     }
 
     if(value == max) {
-      buttonPlus.prop('disabled', true);
+      $(buttonPlus).prop('disabled', true);
     }
     else {
-      buttonPlus.prop('disabled', false);
+      $(buttonPlus).prop('disabled', false);
     }
 
     updatePointsAvantage();
