@@ -29,6 +29,24 @@ $(window).load(function(){
         }
       }
     });
+
+    $(plus_traits_avantages).each(function(){
+      var id = this.id;
+      var plusbutton = '#'+id;
+      var splitarray = id.split('-');
+      var prix = parseInt($('#edit-'+splitarray[1]+'-'+splitarray[2]+'-prix').attr('value'));
+      var max = parseInt($('#edit-'+splitarray[1]+'-'+splitarray[2]).attr('max'));
+      var value = parseInt($('#edit-'+splitarray[1]+'-'+splitarray[2]).attr('value'));
+      var nbPoints = parseInt($('#titre-points-disponibles').attr('value'));
+      if(nbPoints - prix < 0) {
+        $(plusbutton).prop('disabled', true);
+      }
+      else {
+        if(value != max) {
+          $(plusbutton).prop('disabled', false);
+        }
+      }
+    });
   }
 
   function updateTableauCaracteristiques(){
