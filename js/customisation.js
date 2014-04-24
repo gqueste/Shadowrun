@@ -1,6 +1,24 @@
 //<![CDATA[
 $(window).load(function(){
 
+  function TraitMagieActivee() {
+    var id = '#checkbox-Avantage-';
+    var ret = 'normal';
+    if($(id+'Adepte').prop('checked')) {
+      ret = 'Adepte';
+    }
+    if($(id+'Adepte_mystique').prop('checked')) {
+      ret = 'Adepte_mystique';
+    }
+    if($(id+'Magicien').prop('checked')) {
+      ret = 'Magicien';
+    }
+    if($(id+'Technomancien').prop('checked')) {
+      ret = 'Technomancien';
+    }
+    return ret;
+  }
+
   function updateAffichagePoints(){
     var points_carac = parseInt($('#titre-caracteristiques').attr('value'));
     if(points_carac == 0 || points_carac == 1) {
@@ -25,7 +43,43 @@ $(window).load(function(){
           $(checkbox).prop('disabled', true);
         }
         else {
-          $(checkbox).prop('disabled', false);
+          var traitMagique = TraitMagieActivee();
+          var arrayDecompo = id.split('-');
+          var trait = arrayDecompo[2];
+          if(traitMagique != 'normal') {
+            switch(trait) {
+              case 'Adepte':
+                $('#checkbox-Avantage-Magicien').prop('disabled', true);
+                $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
+                $('#checkbox-Avantage-Technomancien').prop('disabled', true);
+              break;
+
+              case 'Magicien':
+                $('#checkbox-Avantage-Adepte').prop('disabled', true);
+                $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
+                $('#checkbox-Avantage-Technomancien').prop('disabled', true);
+              break;
+
+              case 'Adepte_mystique':
+                $('#checkbox-Avantage-Magicien').prop('disabled', true);
+                $('#checkbox-Avantage-Adepte').prop('disabled', true);
+                $('#checkbox-Avantage-Technomancien').prop('disabled', true);
+              break;
+
+              case 'Technomancien':
+                $('#checkbox-Avantage-Magicien').prop('disabled', true);
+                $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
+                $('#checkbox-Avantage-Adepte').prop('disabled', true);
+              break;
+
+              default:
+              //Inutile
+              break;
+            }
+          }
+          else {
+            $(checkbox).prop('disabled', false);
+          }
         }
       }
     });
@@ -56,6 +110,7 @@ $(window).load(function(){
     var array_caracs = new Array('constitution', 'agilite', 'reaction', 'force', 'charisme', 'intuition', 'logique', 'volonte', 'chance', 'magie');
     var pointsTotaux = parseInt($('#titre-points-disponibles').attr('value'));
     var pointsCarac = parseInt($('#titre-caracteristiques').attr('value'));
+
     if(((pointsTotaux - 25) < 0) || ((pointsCarac - 25) < 0)) {
       if(((pointsTotaux - 10) < 0) || ((pointsCarac - 10) < 0)) {
         $('.buttonCaracPlus').prop('disabled', true);
@@ -238,6 +293,46 @@ $(window).load(function(){
     var valueAvantages = parseInt($('#avantages').attr('value'));
     var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
     if(bool) {
+      switch(trait) {
+        case 'Adepte':
+          $('#checkbox-Avantage-Magicien').prop('disabled', true);
+          $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
+          $('#checkbox-Avantage-Technomancien').prop('disabled', true);
+          $('#edit-magie').attr('value', 1);
+          $('#plus-magie').prop('disabled', false);
+          $('#edit-magie').attr('min', 1);
+        break;
+
+        case 'Magicien':
+          $('#checkbox-Avantage-Adepte').prop('disabled', true);
+          $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
+          $('#checkbox-Avantage-Technomancien').prop('disabled', true);
+          $('#edit-magie').attr('value', 1);
+          $('#plus-magie').prop('disabled', false);
+          $('#edit-magie').attr('min', 1);
+        break;
+
+        case 'Adepte-mystique':
+          $('#checkbox-Avantage-Magicien').prop('disabled', true);
+          $('#checkbox-Avantage-Adepte').prop('disabled', true);
+          $('#checkbox-Avantage-Technomancien').prop('disabled', true);
+          $('#edit-magie').attr('value', 1);
+          $('#plus-magie').prop('disabled', false);
+          $('#edit-magie').attr('min', 1);
+        break;
+
+        case 'Technomancien':
+          $('#checkbox-Avantage-Magicien').prop('disabled', true);
+          $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
+          $('#checkbox-Avantage-Adepte').prop('disabled', true);
+          $('#edit-magie').attr('value', 1);
+          $('#plus-magie').prop('disabled', false);
+          $('#edit-magie').attr('min', 1);
+        break;
+
+        default:
+        break;
+      }
       valueAvantages = valueAvantages - value;
       valuePoints = valuePoints - value;
     }
