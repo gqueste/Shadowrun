@@ -43,11 +43,9 @@ $(window).load(function(){
           $(checkbox).prop('disabled', true);
         }
         else {
-          var traitMagique = TraitMagieActivee();
-          var arrayDecompo = id.split('-');
-          var trait = arrayDecompo[2];
-          if(traitMagique != 'normal') {
-            switch(trait) {
+          if(trait == 'Adepte' || trait == 'Adepte_mystique' || trait == 'Magicien' || trait == 'Technomancien') {
+            var traitMagique = TraitMagieActivee();
+            switch(traitMagique) {
               case 'Adepte':
                 $('#checkbox-Avantage-Magicien').prop('disabled', true);
                 $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
@@ -57,7 +55,7 @@ $(window).load(function(){
               case 'Magicien':
                 $('#checkbox-Avantage-Adepte').prop('disabled', true);
                 $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
-                $('#checkbox-Avantage-Technomancien').prop('disabled', true);
+                $('#checkbox-Avantage-Technomancien').prop('disabled', true);  
               break;
 
               case 'Adepte_mystique':
@@ -73,7 +71,7 @@ $(window).load(function(){
               break;
 
               default:
-              //Inutile
+              //inutile
               break;
             }
           }
@@ -125,9 +123,22 @@ $(window).load(function(){
             var plusButton = '#plus-' + array_caracs[i];
             $(plusButton).prop('disabled', true);  
           }
-          else if(((valeurCourante) != valeurMax) && (array_caracs[i] != 'magie')) {     //ATTENTION A GESTION MAGIE
-            var plusButton = '#plus-' + array_caracs[i];
-            $(plusButton).prop('disabled', false);  
+          else {
+            var magieOn = TraitMagieActivee();
+            if(array_caracs[i] == 'magie') {
+              if(magieOn != 'normal') {
+                if(valeurCourante != valeurMax) {
+                  var plusButton = '#plus-' + array_caracs[i];
+                  $(plusButton).prop('disabled', false);
+                }
+              }
+            }
+            else {
+              if(valeurCourante != valeurMax) {
+                var plusButton = '#plus-' + array_caracs[i];
+                $(plusButton).prop('disabled', false);  
+              } 
+            }
           } 
         }
       }
@@ -138,13 +149,23 @@ $(window).load(function(){
         var editCarac = '#edit-' + array_caracs[i];
         var valeurCourante = parseInt($(editCarac).val());
         var valeurMax = parseInt($(editCarac).attr('max'));
-        if(((valeurCourante) != valeurMax) && (array_caracs[i] != 'magie')) {
-          var plusButton = '#plus-' + array_caracs[i];
-          $(plusButton).prop('disabled', false);  
+        if(array_caracs[i] == 'magie') {
+          var magieOn = TraitMagieActivee();
+          if(magieOn != 'normal') {
+            if(valeurCourante != valeurMax) {
+              var plusButton = '#plus-' + array_caracs[i];
+              $(plusButton).prop('disabled', false);
+            }
+          }
+        }
+        else {
+          if(valeurCourante != valeurMax) {
+            var plusButton = '#plus-' + array_caracs[i];
+            $(plusButton).prop('disabled', false);  
+          }
         }
       }
     }
-    updateAffichagePoints();
   }
 
   function augmenteCarac(carac){
@@ -175,7 +196,6 @@ $(window).load(function(){
         $(moinsButton).prop('disabled', false);
       }
     }
-    updateTableauCaracteristiques();
   }
 
   function baisseCarac(carac) {
@@ -204,7 +224,6 @@ $(window).load(function(){
       }
     }
     $(editVise).val(valeurCourante - 1);
-    updateTableauCaracteristiques();
   }
 
   $('.buttonCarac').click(function(event){
@@ -217,6 +236,8 @@ $(window).load(function(){
     else {
       baisseCarac(caracVisee);
     }
+    updateTableauCaracteristiques();
+    updateAffichagePoints();
   });
 
 
@@ -342,9 +363,6 @@ $(window).load(function(){
     }
     $('#avantages').attr('value', valueAvantages);
     $('#titre-points-disponibles').attr('value', valuePoints);
-
-    updatePointsAvantage();
-    updateAffichagePoints();
   }
 
   function updatePointsDefaut() {
@@ -373,9 +391,6 @@ $(window).load(function(){
     }
     $('#defauts').attr('value', valueDefauts);
     $('#titre-points-disponibles').attr('value', valuePoints);
-
-    updatePointsDefaut();
-    updateAffichagePoints();
   }
 
   $('.checkboxTrait').click(function() {
@@ -400,6 +415,10 @@ $(window).load(function(){
         cocheDefaut(traitVise, false);
       }
     }
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateTableauCaracteristiques();
+    updateAffichagePoints();
   });
 
   function changeTrait(operation, typeTrait, traitVise) {
@@ -459,11 +478,6 @@ $(window).load(function(){
     else {
       $(buttonPlus).prop('disabled', false);
     }
-
-    updatePointsAvantage();
-    updatePointsDefaut();
-    updateTableauCaracteristiques()
-    updateAffichagePoints();
   }
 
   $('.buttonTrait').click(function(event){
@@ -472,6 +486,10 @@ $(window).load(function(){
     var typeTrait = arrayDecompo[1];
     var traitVise = arrayDecompo[2];
     changeTrait(operationFaite, typeTrait, traitVise);
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateTableauCaracteristiques();
+    updateAffichagePoints();
   });
 
 });//]]>
