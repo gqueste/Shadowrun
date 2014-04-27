@@ -132,6 +132,10 @@ $(window).load(function(){
                   $(plusButton).prop('disabled', false);
                 }
               }
+              else {
+                $('#plus-magie').prop('disabled', true);
+                $('#moins-magie').prop('disabled', true);
+              }
             }
             else {
               if(valeurCourante != valeurMax) {
@@ -144,7 +148,7 @@ $(window).load(function(){
       }
     }
     else {
-      //enable tous les + sauf ceux qui sont à leur maximum (magie ?)
+      //enable tous les + sauf ceux qui sont à leur maximum
       for (var i = 0; i < array_caracs.length; i++) {
         var editCarac = '#edit-' + array_caracs[i];
         var valeurCourante = parseInt($(editCarac).val());
@@ -156,6 +160,10 @@ $(window).load(function(){
               var plusButton = '#plus-' + array_caracs[i];
               $(plusButton).prop('disabled', false);
             }
+          }
+          else {
+            $('#plus-magie').prop('disabled', true);
+            $('#moins-magie').prop('disabled', true);
           }
         }
         else {
@@ -319,7 +327,7 @@ $(window).load(function(){
           $('#checkbox-Avantage-Magicien').prop('disabled', true);
           $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
           $('#checkbox-Avantage-Technomancien').prop('disabled', true);
-          $('#edit-magie').attr('value', 1);
+          $('#edit-magie').val(1);
           $('#plus-magie').prop('disabled', false);
           $('#edit-magie').attr('min', 1);
         break;
@@ -328,7 +336,7 @@ $(window).load(function(){
           $('#checkbox-Avantage-Adepte').prop('disabled', true);
           $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
           $('#checkbox-Avantage-Technomancien').prop('disabled', true);
-          $('#edit-magie').attr('value', 1);
+          $('#edit-magie').val(1);
           $('#plus-magie').prop('disabled', false);
           $('#edit-magie').attr('min', 1);
         break;
@@ -337,7 +345,7 @@ $(window).load(function(){
           $('#checkbox-Avantage-Magicien').prop('disabled', true);
           $('#checkbox-Avantage-Adepte').prop('disabled', true);
           $('#checkbox-Avantage-Technomancien').prop('disabled', true);
-          $('#edit-magie').attr('value', 1);
+          $('#edit-magie').val(1);
           $('#plus-magie').prop('disabled', false);
           $('#edit-magie').attr('min', 1);
         break;
@@ -346,7 +354,7 @@ $(window).load(function(){
           $('#checkbox-Avantage-Magicien').prop('disabled', true);
           $('#checkbox-Avantage-Adepte_mystique').prop('disabled', true);
           $('#checkbox-Avantage-Adepte').prop('disabled', true);
-          $('#edit-magie').attr('value', 1);
+          $('#edit-magie').val(1);
           $('#plus-magie').prop('disabled', false);
           $('#edit-magie').attr('min', 1);
         break;
@@ -360,6 +368,29 @@ $(window).load(function(){
     else {
       valueAvantages = valueAvantages + value;
       valuePoints = valuePoints + value;
+      if(trait == 'Adepte' || trait == 'Adepte_mystique' || trait == 'Magicien' || trait == 'Technomancien') {
+        $('#checkbox-Avantage-Magicien').prop('disabled', false);
+        $('#checkbox-Avantage-Adepte_mystique').prop('disabled', false);
+        $('#checkbox-Avantage-Adepte').prop('disabled', false);
+        $('#checkbox-Avantage-Technomancien').prop('disabled', false);
+
+        var valueMagie = parseInt($('#edit-magie').val());
+        var maxMagie = parseInt($('#edit-magie').attr('max'));
+        var valeurDue = 0;
+        if(valueMagie == maxMagie) {
+          var temp = maxMagie - 1;
+          temp = temp - 1;
+          valeurDue = 25 + (temp * 10);
+        }
+        else {
+          valeurDue = (valueMagie - 1) * 10;
+        }
+        $('#edit-magie').val(0);
+        valuePoints = valuePoints + valeurDue;
+        var tmp = parseInt($('#titre-caracteristiques').attr('value'));
+        tmp = tmp + valeurDue;
+        $('#titre-caracteristiques').attr('value', tmp);
+      }
     }
     $('#avantages').attr('value', valueAvantages);
     $('#titre-points-disponibles').attr('value', valuePoints);
