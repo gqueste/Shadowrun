@@ -189,13 +189,13 @@ function init() {
       break;
   }
   $traits_avantages = array(
-    'Adepte'                    => array('prix' => 5 , 'points_max' => 1), //CSQ
-    'Adepte mystique'           => array('prix' => 10, 'points_max' => 1), //CSQ
+    'Adepte'                    => array('prix' => 5 , 'points_max' => 1),
+    'Adepte mystique'           => array('prix' => 10, 'points_max' => 1),
     'Affinité avec les esprits' => array('prix' => 10, 'points_max' => 1),
     'Ambidextre'                => array('prix' => 5 , 'points_max' => 1),
     'Apparence humaine'         => array('prix' => 5 , 'points_max' => 1),
-    'Aptitude'                  => array('prix' => 10, 'points_max' => 1), //CSQ
-    'Attribut exceptionnel'     => array('prix' => 20, 'points_max' => 1), //CSQ
+    'Aptitude'                  => array('prix' => 10, 'points_max' => 1),
+    'Attribut exceptionnel'     => array('prix' => 20, 'points_max' => 1),
     'Bon codeur'                => array('prix' => 10, 'points_max' => 1),
     'Caméléon astral'           => array('prix' => 5 , 'points_max' => 1 ),
     'Chanceux'                  => array('prix' => 20, 'points_max' => 1),
@@ -204,11 +204,11 @@ function init() {
     'Dur à cuire'               => array('prix' => 10, 'points_max' => 1),
     'Empathie animale'          => array('prix' => 10, 'points_max' => 1),
     'Endurance à la douleur'    => array('prix' => 5 , 'points_max' => 3),
-    'Esprit mentor'             => array('prix' => 5 , 'points_max' => 1), //CSQ
+    'Esprit mentor'             => array('prix' => 5 , 'points_max' => 1),
     'Guérison rapide'           => array('prix' => 10, 'points_max' => 1),
     'Immunité naturelle'        => array('prix' => 5 , 'points_max' => 1),
     'Lien ténu'                 => array('prix' => 10, 'points_max' => 1),
-    'Magicien'                  => array('prix' => 15, 'points_max' => 1), //CSQ
+    'Magicien'                  => array('prix' => 15, 'points_max' => 1), 
     'Mémoire photographique'    => array('prix' => 10, 'points_max' => 1),
     'M tout le monde'           => array('prix' => 10, 'points_max' => 1),
     'Première impression'       => array('prix' => 5 , 'points_max' => 1),
@@ -216,7 +216,7 @@ function init() {
     'Résistance à la magie'     => array('prix' => 5 , 'points_max' => 4),
     'Résistance aux toxines'    => array('prix' => 5 , 'points_max' => 2),
     'Survivant'                 => array('prix' => 5 , 'points_max' => 3),
-    'Technomancien'             => array('prix' => 5 , 'points_max' => 1), //CSQ
+    'Technomancien'             => array('prix' => 5 , 'points_max' => 1), 
     'Territoire'                => array('prix' => 10, 'points_max' => 1),
     'Tripes'                    => array('prix' => 5 , 'points_max' => 1),
     );
@@ -225,13 +225,13 @@ function init() {
     'Allergie'                  => array('prix' => 5 , 'points_max' => 4),
     'Asocial'                   => array('prix' => 20, 'points_max' => 1),
     'Balise astrale'            => array('prix' => 5 , 'points_max' => 1),
-    'Dépendance'                => array('prix' => 5 , 'points_max' => 6), //csq
+    'Dépendance'                => array('prix' => 5 , 'points_max' => 6),
     'Ecorché'                   => array('prix' => 5 , 'points_max' => 1), 
     'Gremlins'                  => array('prix' => 5 , 'points_max' => 4),
     'Hostilité des esprits'     => array('prix' => 10, 'points_max' => 1),
     'Immunodéficience'          => array('prix' => 5 , 'points_max' => 1),
     'Immunodépression'          => array('prix' => 15, 'points_max' => 1),
-    'Incompétent'               => array('prix' => 5 , 'points_max' => 1), //CSQ
+    'Incompétent'               => array('prix' => 5 , 'points_max' => 1),
     'Infirme'                   => array('prix' => 20, 'points_max' => 1),
     'Malchanceux'               => array('prix' => 20, 'points_max' => 1),
     'Mal du simsens'            => array('prix' => 10, 'points_max' => 1),
