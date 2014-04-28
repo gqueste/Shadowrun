@@ -48,6 +48,7 @@ $points_disponibles;
 $points_attributs;
 $traits_avantages;
 $traits_defauts;
+$competences;
 
 init();
 
@@ -242,6 +243,252 @@ function init() {
     'SINner'                    => array('prix' => 5 , 'points_max' => 2),
     'Système nerveux sensible'  => array('prix' => 5 , 'points_max' => 1),
     );
+
+  $competences = array(
+    'Combat' => array(
+      'Special' => array(
+        array('Armes de jet', 'attribut' => 'agilite', 'specialites' => null),
+        array('Armes de trait', 'attribut' => 'agilite', 'specialites' => null),
+        array('Armes exotique', 'attribut' => 'agilite', 'specialites' => null),
+        array('Armes lourdes', 'attribut' => 'agilite', 'specialites' => null),
+        array('Esquive', 'attribut' => 'reaction', 'specialites' => null)
+      ),
+      'Armes à feu' => array(
+        array('Armes automatiques', 'attribut' => 'agilite', 'specialites' => array(
+          'Carabine', 'Fusils d\'assaut', 'Mitraillettes', 'Pistolets mitrailleurs'
+          )
+        ),
+        array('Fusils', 'attribut' => 'agilite', 'specialites' => array(
+          'Shotguns', 'Fusils de précision', 'Fusils de sport'
+          )
+        ),
+        array('Pistolets', 'attribut' => 'agilite', 'specialites' => array(
+          'Armes de poche', 'Revolvers', 'Semi-automatiques', 'Tasers'
+          )
+        )
+      ),
+      'Combat rapproché' => array(
+        array('Armes contondantes', 'attribut' => 'agilite', 'specialites' => array(
+          'Bâton à deux mains', 'Marteaux', 'Matraques', 'Parade'
+          )
+        ),
+        array('Armes tranchantes', 'attribut' => 'agilite', 'specialites' => array(
+          'Couteaux', 'Epées', 'Haches', 'Lames Cyber Implantées', 'Parade' 
+          )
+        ),
+        array('Combat à mains nues', 'attribut' => 'agilite', 'specialites' => array(
+          'Arts martiaux', 'Cyber Implants', 'Immobilisation', 'Parade'
+          )
+        )
+      )
+    ),
+    'Magie' => array(
+      'Special' => array(
+        array('Analyse astrale', 'attribut' => 'magie', 'specialites' => null
+        )
+      ),
+      'Conjuration' => array(
+        array('Banissement', 'attribut' => 'magie', 'specialites' => null
+        ),
+        array('Contrôle d\' esprits', 'attribut' => 'magie', 'specialites' => null
+        ),
+        array('Invocations', 'attribut' => 'magie', 'specialites' => null
+        )
+      ),
+      'Sorcellerie' => array(
+        array('Contresort', 'attribut' => 'magie', 'specialites' => null
+        ),
+        array('Lancement de sorts', 'attribut' => 'magie', 'specialites' => null
+        ),
+        array('Lancements de sorts rituel', 'attribut' => 'magie', 'specialites' => null
+        )
+      )
+    ),
+    'Physique' => array(
+      'Special' => array(
+        array('Evasion', 'attribut' => 'agilite', 'specialites' => null),
+        array('Parachutisme', 'attribut' => 'constitution', 'specialites' => null),
+        array('Perception', 'attribut' => 'intuition', 'specialites' => null),
+        array('Plongée', 'attribut' => 'constitution', 'specialites' => null)
+      ),
+      'Athlétisme' => array(
+        array('Course', 'attribut' => 'force', 'specialites' => array(
+          'Course de fond', 'Milieu naturel', 'Sprint', 'Milieu urbain'
+          )
+        ),
+        array('Escalade', 'attribut' => 'force', 'specialites' => array(
+          'Assuré', 'Libre', 'Rappel', 'Type environnement'
+          )
+        ),
+        array('Gymnastique', 'attribut' => 'agilite', 'specialites' => array(
+          'Equilibre', 'Réception de chute', 'Danse', 'Roulade', 'Saut'
+          )
+        ),
+        array('Natation', 'attribut' => 'force', 'specialites' => array(
+          'Endurance', 'Sprint'
+          )
+        )
+      ),
+      'Furtivité' => array(
+        array('Déguisement', 'attribut' => 'intuition', 'specialites' => array(
+          'Camouflage', 'Cosmétique', 'Théâtral'
+          )
+        ),
+        array('Escamotage', 'attribut' => 'agilite', 'specialites' => array(
+          'Prestidigitation', 'Pickpocket', 'Vol à l\'étalage' 
+          )
+        ),
+        array('Filature', 'attribut' => 'intuition', 'specialites' => array(
+          'Planques', 'Semer', 'Suivre'
+          )
+        ),
+        array('Infiltration', 'attribut' => 'agilite', 'specialites' => array(
+          'Urbaine', 'En véhicule', 'En milieu naturel', 'Par moyen de pression'
+          )
+        )
+      ),
+      'Plein air' => array(
+        array('Navigation', 'attribut' => 'intuition', 'specialites' => null
+        ),
+        array('Pistage', 'attribut' => 'intuition', 'specialites' => null
+        ),
+        array('Survie', 'attribut' => 'volonte', 'specialites' => null
+        )
+      )
+    ),
+    'Résonnance' => array(
+      'Technomancie' => array(
+        array('Compilation', 'attribut' => 'magie', 'specialites' => null
+        ),
+        array('Décompilation', 'attribut' => 'magie', 'specialites' => null
+        ),
+        array('Inscription', 'attribut' => 'magie', 'specialites' => null
+        )
+      )
+    ),
+    'Social' => array(
+      'Special' => array(
+        array('Enseignement', 'attribut' => 'charisme', 'specialites' => null),
+        array('Intimidation', 'attribut' => 'charisme', 'specialites' => null)
+      ),
+      'Influence' => array(
+        array('Escroquerie', 'attribut' => 'charisme', 'specialites' => array(
+          'Baratin', 'Imposture', 'Séduction'
+          )
+        ),
+        array('Etiquette', 'attribut' => 'charisme', 'specialites' => null
+        ),
+        array('Leadership', 'attribut' => 'charisme', 'specialites' => array(
+          'Test de tripes', 'Moral', 'Persuasion', 'Stratégie', 'Tactique'
+          )
+        ),
+        array('Négociation', 'attribut' => 'charisme', 'specialites' => array(
+          'Diplomatie', 'Marchandage', 'Déceler les motivations'
+          )
+        )
+      )
+    ),
+    'Technique' => array(
+      'Special' => array(
+        array('Armurerie', 'attribut' => 'logique', 'specialites' => null),
+        array('Art', 'attribut' => 'intuition', 'specialites' => null),
+        array('Chimie', 'attribut' => 'logique', 'specialites' => null),
+        array('Explosifs', 'attribut' => 'logique', 'specialites' => null),
+        array('Falsification', 'attribut' => 'agilite', 'specialites' => null),
+        array('Serrurerie', 'attribut' => 'agilite', 'specialites' => null)
+      ),
+      'Biotech' => array(
+        array('Cybertechnologie', 'attribut' => 'logique', 'specialites' => array(
+          'Bioware', 'Céphaloware', 'Membres cybernétiques', 'Nanoware', 'Somatoware'
+          )
+        ),
+        array('Médecine', 'attribut' => 'logique', 'specialites' => array(
+          'Chirurgie esthétique', 'Soins intensifs', 'Chirurgie implantatoire', 'Soins magiques', 'Culture d\'organes', 'Chirurgie traumatologique'
+          )
+        ),
+        array('Premiers soins', 'attribut' => 'logique', 'specialites' => null
+        )
+      ),
+      'Electronique' => array(
+        array('Hardware', 'attribut' => 'logique', 'specialites' => null
+        ),
+        array('Informatique', 'attribut' => 'logique', 'specialites' => null
+        ),
+        array('Recherche de données', 'attribut' => 'logique', 'specialites' => null
+        ),
+        array('Software', 'attribut' => 'logique', 'specialites' => null
+        )
+      ),
+      'Elevage' => array(
+        array('Animaux', 'attribut' => 'intuition', 'specialites' => null
+        ),
+        array('Dressage', 'attribut' => 'intuition', 'specialites' => null
+        ),
+        array('Monte', 'attribut' => 'reaction', 'specialites' => null
+        ),
+        array('Technologie vétérinaire', 'attribut' => 'logique', 'specialites' => null
+        )
+      ),
+      'Mécanique' => array(
+        array('Mécanique Aéronautique', 'attribut' => 'logique', 'specialites' => array(
+          'Aérospatiale', 'Voiture fixe', 'Dirigeables', 'Rotors', 'Voiture orientale', 'Poussée vectorielle'
+          )
+        ),
+        array('Mécanique automobile', 'attribut' => 'logique', 'specialites' => array(
+          'Anthropomorphes', 'Véhicules à chenilles', 'Glisseurs', 'Véhicules à roues' 
+          )
+        ),
+        array('Mécanique industrielle', 'attribut' => 'logique', 'specialites' => array(
+          'Systèmes d\'alimentation électriques', 'Hydraulique', 'Robotique', 'Structurelle', 'Soudure'
+          )
+        ),
+        array('Mécanique Nautique', 'attribut' => 'logique', 'specialites' => array(
+          'Bateaux à moteur', 'Navires', 'Sous-marins', 'Voiliers'
+          )
+        )
+      ),
+      'Piratage' => array(
+        array('Cybercombat', 'attribut' => 'logique', 'specialites' => null
+        ),
+        array('Guerre électronique', 'attribut' => 'logique', 'specialites' => array(
+          'Brouillage', 'Communications', 'Cryptage', 'Opérations de senseurs' 
+          )
+        ),
+        array('Hacking', 'attribut' => 'logique', 'specialites' => null
+        ),
+      ),
+    ),
+    'Pilotage' => array(
+      'Special' => array(
+        array('Anthropomorphe', 'attribut' => 'reaction', 'specialites' => array(
+          'Bipode', 'Quadripode', 'Opérations à distance' 
+          )
+        ),
+        array('Appareils spatiaux', 'attribut' => 'reaction', 'specialites' => array(
+          'Espace profond', 'Lancement d\'appareil', 'Opérations à distance', 'Semi-ballistiques', 'Suborbitaux' 
+          )
+        ),
+        array('Appareils volants', 'attribut' => 'reaction', 'specialites' => array(
+          'Voiture fixe', 'Plus léger que l\'air', 'Opérations à distance', 'Rotors', 'Poussée vectorielle', 'Voiture orientale' 
+          )
+        ),
+        array('Armes de véhicules', 'attribut' => 'agilite', 'specialites' => array(
+          'Balistique', 'Canons', 'Armes à énergie', 'Missiles guidés', 'Roquettes' 
+          )
+        ),
+        array('Véhicules aquatiques', 'attribut' => 'reaction', 'specialites' => array(
+          'Bateaux à moteur', 'Navires', 'Opérations à distance', 'Sous-marins', 'Voiliers' 
+          )
+        ),
+        array('Véhicules exotiques', 'attribut' => 'reaction', 'specialites' => null
+        ),
+        array('Véhicules terrestres', 'attribut' => 'reaction', 'specialites' => array(
+          'Aéroglisseurs', 'Véhicules à chenilles', 'Motos', 'Opérations à distance', 'Véhicules à roues' 
+          )
+        )
+      )
+    ),
+  );
 }
 
 function caseTableauCaracteristiques($caracteristique_en_cours) {
