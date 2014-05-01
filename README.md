@@ -9,7 +9,9 @@ TODO :
 	* Gestion des conséquences de Esprit Mentor [Priorité faible]
 	* Gestion des conséquences de Dépendance,... (champ pour indiquer le champ choisi) [Priorité faible]
 	* Placer description des traits [Priorité moyenne]
-- Compétences
+- Compétences:
+	* Initialisation du tableau [Priorité haute]
+	* Update du tableau [Priorité haute]
 
 EVOLUTIONS POSSIBLES :
 - Placer les données correspondant aux caractéristiques, traits, compétences avec les descriptions, etc... dans un fichier externe(JSON) ou BDD
