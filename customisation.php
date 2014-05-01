@@ -138,8 +138,31 @@ foreach ($tab_defauts as $trait) {
 }
 
 
+echo"      </tbody>
+    </table>
+  </div>
+
+  <div id='description-defauts' class='col-md-6'>
+    <p>Description des défauts</p>
+  </div>
+  
+  </div>
+
+  <div class='col-md-12'>
+    <h2>Compétences</h2>
+    <h3 id='competences' value='0'>Compétences : 0 PC</h3>
+    <table class='table table-bordered'>
+    ";
+
+$tab_comp = array_keys($competences);
+foreach($tab_comp as $grand_groupe) {
+  regionTableauCompetences($grand_groupe);
+}
+
+
+
 function init() {
-  global $totaux_points, $points_disponibles, $points_attributs, $points_caracteristiques, $traits_avantages, $traits_defauts;
+  global $totaux_points, $points_disponibles, $points_attributs, $points_caracteristiques, $traits_avantages, $traits_defauts, $competences;
   $totaux_points = 400;
   $points_caracteristiques = $totaux_points / 2;
   $points_disponibles = 0;
@@ -456,7 +479,7 @@ function init() {
         ),
         array('Hacking', 'attribut' => 'logique', 'specialites' => null
         ),
-      ),
+      )
     ),
     'Pilotage' => array(
       'Special' => array(
@@ -487,7 +510,7 @@ function init() {
           )
         )
       )
-    ),
+    )
   );
 }
 
@@ -573,15 +596,175 @@ function caseTableauTraits($trait, $type) {
         </tr>";
 }
 
-?>  
-      </tbody>
-    </table>
-  </div>
 
-  <div id='description-defauts' class='col-md-6'>
-    <p>Description des défauts</p>
-  </div>
-  
+function regionTableauCompetences($grand_groupe) {
+  global $competences;
+  $name = str_replace(' ', '_', $grand_groupe);
+  $name = str_replace('\'', '', $name);
+  echo "<tr style='text-align:center;' class='warning'><td colspan='4'><h4>".$grand_groupe."</h4></td></tr>";
+  $tab_gc = array_keys($competences[$grand_groupe]);
+  foreach($tab_gc as $groupe_comp) {
+    tableauGroupeCompetences($grand_groupe, $groupe_comp); 
+  }
+}
+
+function tableauGroupeCompetences($grand_groupe, $groupe_comp) {
+  global $competences;
+  $name = $groupe_comp;
+  $name = str_replace(' ', '_', $name);
+  $name = str_replace('\'', '', $name);
+
+  if($name != 'Special') {
+    echo "<tr class='active'>
+        <th>".$groupe_comp."</th>
+        <td style='width:120px' colspan='3'>
+          <div class='input-group input-group-sm' style='width:117px'>
+            <input class='form-control gc ".$name."' id='edit-".$name."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
+            <div class='input-group-btn'>
+              <span class='input-group-btn'>
+                <button id='plus-".$name."' class='btn btn-default btn-sm gc ".$name." plus' type='button' onclick='' style='cursor:pointer'>
+                  <span class='glyphicon glyphicon-chevron-up'></span>
+                </button>
+              </span>
+              <span class='input-group-btn'>
+                <button id='moins-".$name."' class='btn btn-default btn-sm gc ".$name." moins' type='button' onclick='' disabled>
+                  <span class='glyphicon glyphicon-chevron-down'></span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </td>
+      </tr>";
+  }
+        
+  $tab_comps = $competences[$grand_groupe][$groupe_comp];
+  foreach($tab_comps as $comp) {
+    tableauCompetences($grand_groupe, $groupe_comp, $comp);
+  }
+}
+
+function tableauCompetences($grand_groupe, $groupe_comp, $comp) {
+  global $competences;
+
+  $nameGC = $groupe_comp;
+  $nameGC = str_replace(' ', '_', $nameGC);
+  $nameGC = str_replace('\'', '', $nameGC);
+
+  $nameComp = $comp[0];
+  $nameComp = str_replace(' ', '_', $nameComp);
+  $nameComp = str_replace('\'', '', $nameComp);
+
+  $caracLiee = $comp['attribut'];
+  $nameCarac = '';
+  switch ($caracLiee) {
+    case 'force':
+      $nameCarac = 'Force';
+      break;
+
+    case 'constitution':
+      $nameCarac = 'Constitution';
+      break;
+
+    case 'agilite':
+      $nameCarac = 'Agilité';
+      break;
+
+    case 'reaction':
+      $nameCarac = 'Réaction';
+      break;
+
+    case 'charisme':
+      $nameCarac = 'Charisme';
+      break;
+
+    case 'intuition':
+      $nameCarac = 'Intuition';
+      break;
+
+    case 'logique':
+      $nameCarac = 'Logique';
+      break;
+
+    case 'volonte':
+      $nameCarac = 'Volonté';
+      break;
+
+    case 'magie':
+      $nameCarac = 'Magie';
+      break;
+    
+    default:
+      break;
+  }
+
+  echo "<tr>
+        <td><p style='margin-left: 30px;'>".$comp[0]." (".$nameCarac.")</p></td>
+        <td style='width:120px'>
+          <div class='input-group input-group-sm' style='width:117px'>
+            <input class='form-control comp ".$nameGC." ".$nameComp."' id='edit-".$nameGC."-".$nameComp."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
+            <div class='input-group-btn'>
+              <span class='input-group-btn'>
+                <button id='plus-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm comp ".$nameGC." ".$nameComp." plus' type='button' onclick='' style='cursor:pointer'>
+                  <span class='glyphicon glyphicon-chevron-up'></span>
+                </button>
+              </span>
+              <span class='input-group-btn'>
+                <button id='moins-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm comp ".$nameGC." ".$nameComp." moins' type='button' onclick='' disabled>
+                  <span class='glyphicon glyphicon-chevron-down'></span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <p id='carac-".$nameComp."-".$caracLiee."' class='caracLiee' style='text-align:center'>+ 0</p>
+        </td>
+        <td>
+          <p id='total-".$nameComp."' class='totalComp' style='text-align:center'>= 0</p>
+        </td>
+      </tr>
+  ";
+
+  $tab_spec = $comp['specialites'];
+  if(sizeof($tab_spec) == 0) {
+    echo "<tr>
+        <td><p style='margin-left: 90px;'><em>Entrez une spécialité</em></p></td>
+        <td>
+          <input id='checkbox-".$nameComp."-specialite' type='checkbox' class='checkbox spec ".$nameGC." ".$nameComp." specialite'>
+        </td>
+        <td colspan='2'>
+          <input id='input-".$nameComp."-specialite' type='text' class='form-control spec ".$nameGC." ".$nameComp." specialite' style='width:200px'></td>  
+      </tr>
+    ";
+  }
+  else {
+    foreach($tab_spec as $spec) {
+      tableauSpecialites($nameGC, $comp, $spec);
+    }
+  }
+}
+
+function tableauSpecialites($nameGC, $comp, $spec) {
+  $nameComp = $comp[0];
+  $nameComp = str_replace(' ', '_', $nameComp);
+  $nameComp = str_replace('\'', '', $nameComp);
+
+  $nameSpec = $spec;
+  $nameSpec = str_replace(' ', '_', $nameSpec);
+  $nameSpec = str_replace('\'', '', $nameSpec);
+
+
+  echo"<tr>
+        <td><p style='margin-left: 90px;'><em>* ".$spec."</em></p></td>
+        <td colspan='3'>
+          <input id='checkbox-".$nameComp."-".$nameSpec."' type='checkbox' class='checkbox spec ".$nameGC." ".$nameComp." ".$nameSpec."'>
+        </td>
+      </tr>
+  ";
+}
+
+?>  
+    </table>
   </div>
 
     </div>
