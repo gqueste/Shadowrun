@@ -10,8 +10,9 @@ TODO :
 	* Gestion des conséquences de Dépendance,... (champ pour indiquer le champ choisi) [Priorité faible]
 	* Placer description des traits [Priorité moyenne]
 - Compétences:
-	* Initialisation du tableau [Priorité haute]
-	* Update du tableau [Priorité haute]
+	* Réponse aux actions + - et checkbox [Priorité haute]
+	* dans l'autoupdate, ajouter les calculs dans compétences et lien avec attributs [Priorité haute]
+	* Gestion magie, technomancie [Priorité haute]
 
 EVOLUTIONS POSSIBLES :
-- Placer les données correspondant aux caractéristiques, traits, compétences avec les descriptions, etc... dans un fichier externe(JSON) ou BDD
+- Place les données correspondant aux caractéristiques, traits, compétences avec les descriptions, etc... dans un fichier externe(JSON) ou BDD
