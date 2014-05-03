@@ -604,7 +604,7 @@ function regionTableauCompetences($grand_groupe) {
   echo "<tr style='text-align:center;' class='warning'><td colspan='4'><h4>".$grand_groupe."</h4></td></tr>";
   $tab_gc = array_keys($competences[$grand_groupe]);
   foreach($tab_gc as $groupe_comp) {
-    tableauGroupeCompetences($grand_groupe, $groupe_comp); 
+    tableauGroupeCompetences($name, $groupe_comp); 
   }
 }
 
@@ -622,12 +622,12 @@ function tableauGroupeCompetences($grand_groupe, $groupe_comp) {
             <input class='form-control gc ".$name."' id='edit-".$name."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
-                <button id='plus-".$name."' class='btn btn-default btn-sm gc ".$name." plus' type='button' onclick='' style='cursor:pointer'>
+                <button id='plus-".$name."' class='btn btn-default btn-sm gcPlus ".$grand_groupe." ".$name."' type='button' onclick='' style='cursor:pointer'>
                   <span class='glyphicon glyphicon-chevron-up'></span>
                 </button>
               </span>
               <span class='input-group-btn'>
-                <button id='moins-".$name."' class='btn btn-default btn-sm gc ".$name." moins' type='button' onclick='' disabled>
+                <button id='moins-".$name."' class='btn btn-default btn-sm gcMoins ".$grand_groupe." ".$name."' type='button' onclick='' disabled>
                   <span class='glyphicon glyphicon-chevron-down'></span>
                 </button>
               </span>
@@ -704,12 +704,12 @@ function tableauCompetences($grand_groupe, $groupe_comp, $comp) {
             <input class='form-control comp ".$nameGC." ".$nameComp."' id='edit-".$nameGC."-".$nameComp."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
-                <button id='plus-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm comp ".$nameGC." ".$nameComp." plus' type='button' onclick='' style='cursor:pointer'>
+                <button id='plus-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm compPlus ".$nameGC." ".$nameComp."' type='button' onclick='' style='cursor:pointer'>
                   <span class='glyphicon glyphicon-chevron-up'></span>
                 </button>
               </span>
               <span class='input-group-btn'>
-                <button id='moins-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm comp ".$nameGC." ".$nameComp." moins' type='button' onclick='' disabled>
+                <button id='moins-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm compMoins ".$nameGC." ".$nameComp." moins' type='button' onclick='' disabled>
                   <span class='glyphicon glyphicon-chevron-down'></span>
                 </button>
               </span>
