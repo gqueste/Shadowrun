@@ -1,4 +1,25 @@
 //<![CDATA[
+
+function updateCompetences() {
+  var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+
+  if(pointsDispos < 2) {
+    $('.checkboxspec').each(function(){
+      var id = this.id;
+      id = '#'+id;
+      if(!$(id).prop('checked')) {
+        var arrayid = id.split('-');
+        var nameSpec = arrayid[2];
+        $(id).prop('disabled', true);
+        if(nameSpec == 'specialite') {
+          var idInput = '#input-'+arrayid[1]+'-'+arrayid[2];
+          $(idInput).prop('disabled', true);
+        }
+      }
+    });
+  }
+}
+
 $(window).load(function(){
 
   function TraitMagieActivee() {
@@ -38,6 +59,8 @@ $(window).load(function(){
       var checkbox = '#'+id;
       var nbPoints = parseInt($('#titre-points-disponibles').attr('value'));
       var valueAvantage = parseInt($(checkbox).attr('value'));
+      var arrayid = id.split('-');
+      var trait = arrayid[2];
       if(!$(checkbox).prop('checked')) {
         if(nbPoints - valueAvantage < 0) {
           $(checkbox).prop('disabled', true);
@@ -80,7 +103,7 @@ $(window).load(function(){
           }
         }
       }
-    });
+    }); 
 
     $(plus_traits_avantages).each(function(){
       var id = this.id;
@@ -245,6 +268,7 @@ $(window).load(function(){
       baisseCarac(caracVisee);
     }
     updateTableauCaracteristiques();
+    updateCompetences();
     updateAffichagePoints();
   });
 
@@ -449,6 +473,7 @@ $(window).load(function(){
     updatePointsAvantage();
     updatePointsDefaut();
     updateTableauCaracteristiques();
+    updateCompetences();
     updateAffichagePoints();
   });
 
@@ -520,7 +545,9 @@ $(window).load(function(){
     updatePointsAvantage();
     updatePointsDefaut();
     updateTableauCaracteristiques();
+    updateCompetences();
     updateAffichagePoints();
   });
 
-});//]]>
+});
+//]]>

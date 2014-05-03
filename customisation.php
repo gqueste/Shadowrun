@@ -730,7 +730,7 @@ function tableauCompetences($grand_groupe, $groupe_comp, $comp) {
     echo "<tr>
         <td><p style='margin-left: 90px;'><em>Entrez une spécialité</em></p></td>
         <td>
-          <input id='checkbox-".$nameComp."-specialite' type='checkbox' class='checkbox spec ".$nameGC." ".$nameComp." specialite'>
+          <input id='checkbox-".$nameComp."-specialite' type='checkbox' class='checkboxspec ".$nameGC." ".$nameComp." specialite'>
         </td>
         <td colspan='2'>
           <input id='input-".$nameComp."-specialite' type='text' class='form-control spec ".$nameGC." ".$nameComp." specialite' style='width:200px'></td>  
@@ -757,7 +757,7 @@ function tableauSpecialites($nameGC, $comp, $spec) {
   echo"<tr>
         <td><p style='margin-left: 90px;'><em>* ".$spec."</em></p></td>
         <td colspan='3'>
-          <input id='checkbox-".$nameComp."-".$nameSpec."' type='checkbox' class='checkbox spec ".$nameGC." ".$nameComp." ".$nameSpec."'>
+          <input id='checkbox-".$nameComp."-".$nameSpec."' type='checkbox' class='checkboxspec ".$nameGC." ".$nameComp." ".$nameSpec."'>
         </td>
       </tr>
   ";
@@ -766,7 +766,7 @@ function tableauSpecialites($nameGC, $comp, $spec) {
 ?>  
     </table>
   </div>
-
+  <script type="text/javascript">updateCompetences();</script>
     </div>
  	</body>
 </html>
