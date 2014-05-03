@@ -717,7 +717,7 @@ function tableauCompetences($grand_groupe, $groupe_comp, $comp) {
           </div>
         </td>
         <td>
-          <p id='carac-".$nameComp."-".$caracLiee."' class='caracLiee' style='text-align:center'>+ 0</p>
+          <p id='carac-".$grand_groupe."-".$nameGC."-".$nameComp."-".$caracLiee."' class='caracLiee' style='text-align:center'>+ 0</p>
         </td>
         <td>
           <p id='total-".$nameComp."' class='totalComp' style='text-align:center'>= 0</p>
