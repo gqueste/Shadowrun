@@ -40,6 +40,12 @@ function gestionSpec(){
           var specCourante = specs[i];
           var idSpec = '#'+specCourante.id;
           $(idSpec).prop('disabled', false);
+          var arrayid = idSpec.split('-');
+          var nameSpec = arrayid[2];
+          if(nameSpec == 'specialite') {
+            var idInput = '#input-'+arrayid[1]+'-'+nameSpec;
+            $(idInput).prop('disabled', true);
+          }
         }
       }
       else {
@@ -48,6 +54,12 @@ function gestionSpec(){
           var idSpec = '#'+specCourante.id;
           if(idSpec != checkboxCochee) {
             $(idSpec).prop('disabled', true);
+            var arrayid = idSpec.split('-');
+            var nameSpec = arrayid[2];
+            if(nameSpec == 'specialite') {
+              var idInput = '#input-'+arrayid[1]+'-'+nameSpec;
+              $(idInput).prop('disabled', true);
+            }
           }
         }
       }
@@ -57,6 +69,12 @@ function gestionSpec(){
         var specCourante = specs[i];
         var idSpec = '#'+specCourante.id;
         $(idSpec).prop('disabled', true);
+        var arrayid = idSpec.split('-');
+        var nameSpec = arrayid[2];
+        if(nameSpec == 'specialite') {
+          var idInput = '#input-'+arrayid[1]+'-'+nameSpec;
+          $(idInput).prop('disabled', true);
+        }
       }
     }
   });
@@ -140,7 +158,7 @@ function verrouillageSpec() {
       var nameSpec = arrayid[2];
       $(id).prop('disabled', true);
       if(nameSpec == 'specialite') {
-        var idInput = '#input-'+arrayid[1]+'-'+arrayid[2];
+        var idInput = '#input-'+arrayid[1]+'-'+nameSpec;
         $(idInput).prop('disabled', true);
       }
     }
