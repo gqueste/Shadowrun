@@ -18,17 +18,74 @@ function TraitMagieActivee() {
   return ret;
 }
 
-function gestionMagie() {
-  var magie = TraitMagieActivee();
-  switch(magie) {
-    case 'normal':
-      var grand_groupe = ['Magie', 'Résonnance'];
-      
-    break;
+function gestionSpec(){
+  $('.comp').each(function(){
+    var id = this.id;
+    id = '#'+id;
+    var value = parseInt($(id).val());
+    var nameArray = id.split('-');
+    var comp = nameArray[3];
+    var specs = $('.'+comp+'spec');
+    if(value != 0) {
+      var checkboxCochee = '';
+      for (var i = 0; i < specs.length; i++) {
+        var specCourante = specs[i];
+        var idSpec = '#'+specCourante.id;
+        if($(idSpec).prop('disabled')) {
+          checkboxCochee = idSpec;
+        }
+      }
+      if(checkboxCochee == '') {
+        for (var i = 0; i < specs.length; i++) {
+          var specCourante = specs[i];
+          var idSpec = '#'+specCourante.id;
+          $(idSpec).prop('disabled', false);
+        }
+      }
+      else {
+        for (var i = 0; i < specs.length; i++) {
+          var specCourante = specs[i];
+          var idSpec = '#'+specCourante.id;
+          if(idSpec != checkboxCochee) {
+            $(idSpec).prop('disabled', true);
+          }
+        }
+      }
+    }
+    else {
+      for (var i = 0; i < specs.length; i++) {
+        var specCourante = specs[i];
+        var idSpec = '#'+specCourante.id;
+        $(idSpec).prop('disabled', true);
+      }
+    }
+  });
+}
 
-    default:
-    break;
-  }
+function gestionComp() {
+  $('.comp').each(function(){
+    var id = this.id;
+    id = '#'+id;
+    var value = parseInt($(id).val());
+    var valueMin = parseInt($(id).attr('min'));
+    var valueMax = parseInt($(id).attr('max'));
+    var nameArray = id.split('-');
+    var groupeComp = nameArray[2];
+    var comp = nameArray[3];
+    if(value == valueMin) {
+      $('#moins-'+groupeComp+'-'+comp).prop('disabled', true);
+    }
+    else {
+      $('#moins-'+groupeComp+'-'+comp).prop('disabled', false);
+    }
+
+    if(value == valueMax) {
+      $('#plus-'+groupeComp+'-'+comp).prop('disabled', true);
+    }
+    else {
+      $('#plus-'+groupeComp+'-'+comp).prop('disabled', false);
+    }
+  });
 }
 
 
@@ -40,19 +97,20 @@ function gestionGroupeComp(){
     var valueMin = parseInt($(id).attr('min'));
     var valueMax = parseInt($(id).attr('max'));
     var nameArray = id.split('-');
+    var groupeComp = nameArray[2];
     var magieActivee = TraitMagieActivee();
     if(value == valueMin) {
-      $('#moins-'+nameArray[1]).prop('disabled', true);
+      $('#moins-'+groupeComp).prop('disabled', true);
     }
     else {
-      $('#moins-'+nameArray[1]).prop('disabled', false);
+      $('#moins-'+groupeComp).prop('disabled', false);
     }
 
     if(value == valueMax) {
-      $('#plus-'+nameArray[1]).prop('disabled', true);
+      $('#plus-'+groupeComp).prop('disabled', true);
     }
     else {
-      $('#plus-'+nameArray[1]).prop('disabled', false);
+      $('#plus-'+groupeComp).prop('disabled', false);
     }
   });
 }
@@ -91,13 +149,20 @@ function verrouillageSpec() {
 
 function updateCompetences() {
   var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
-  gestionMagie();
 
   if(pointsDispos < 2) {
     verrouillageSpec();
   }
+  else {
+    gestionSpec();
+  }
+
+
   if(pointsDispos < 4) {
     verrouillageComp();
+  }
+  else {
+    gestionComp();
   }
 
   if(pointsDispos < 10) {

@@ -619,7 +619,7 @@ function tableauGroupeCompetences($grand_groupe, $groupe_comp) {
         <th>".$groupe_comp."</th>
         <td style='width:120px' colspan='3'>
           <div class='input-group input-group-sm' style='width:117px'>
-            <input class='form-control gc ".$name."' id='edit-".$name."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
+            <input class='form-control gc ".$name."' id='edit-".$grand_groupe."-".$name."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
                 <button id='plus-".$name."' class='btn btn-default btn-sm gcPlus ".$grand_groupe." ".$name."' type='button' onclick='' style='cursor:pointer'>
@@ -701,7 +701,7 @@ function tableauCompetences($grand_groupe, $groupe_comp, $comp) {
         <td><p style='margin-left: 30px;'>".$comp[0]." (".$nameCarac.")</p></td>
         <td style='width:120px'>
           <div class='input-group input-group-sm' style='width:117px'>
-            <input class='form-control comp ".$nameGC." ".$nameComp."' id='edit-".$nameGC."-".$nameComp."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
+            <input class='form-control comp ".$nameGC." ".$nameComp."' id='edit-".$grand_groupe."-".$nameGC."-".$nameComp."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
                 <button id='plus-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm compPlus ".$nameGC." ".$nameComp."' type='button' onclick='' style='cursor:pointer'>
@@ -730,7 +730,7 @@ function tableauCompetences($grand_groupe, $groupe_comp, $comp) {
     echo "<tr>
         <td><p style='margin-left: 90px;'><em>Entrez une spécialité</em></p></td>
         <td>
-          <input id='checkbox-".$nameComp."-specialite' type='checkbox' class='checkboxspec ".$nameGC." ".$nameComp." specialite'>
+          <input id='checkbox-".$nameComp."-specialite' type='checkbox' class='checkboxspec ".$nameGC." ".$nameComp." ".$nameComp."spec specialite'>
         </td>
         <td colspan='2'>
           <input id='input-".$nameComp."-specialite' type='text' class='form-control spec ".$nameGC." ".$nameComp." specialite' style='width:200px'></td>  
@@ -757,7 +757,7 @@ function tableauSpecialites($nameGC, $comp, $spec) {
   echo"<tr>
         <td><p style='margin-left: 90px;'><em>* ".$spec."</em></p></td>
         <td colspan='3'>
-          <input id='checkbox-".$nameComp."-".$nameSpec."' type='checkbox' class='checkboxspec ".$nameGC." ".$nameComp." ".$nameSpec."'>
+          <input id='checkbox-".$nameComp."-".$nameSpec."' type='checkbox' class='checkboxspec ".$nameGC." ".$nameComp." ".$nameComp."spec ".$nameSpec."'>
         </td>
       </tr>
   ";
