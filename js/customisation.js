@@ -125,20 +125,21 @@ function gestionGroupeComp(){
     var valueMin = parseInt($(id).attr('min'));
     var valueMax = parseInt($(id).attr('max'));
     var nameArray = id.split('-');
+    var grand_groupe = nameArray[1];
     var groupeComp = nameArray[2];
     var magieActivee = TraitMagieActivee();
     if(value == valueMin) {
-      $('#moins-'+groupeComp).prop('disabled', true);
+      $('#moins-'+grand_groupe+'-'+groupeComp).prop('disabled', true);
     }
     else {
-      $('#moins-'+groupeComp).prop('disabled', false);
+      $('#moins-'+grand_groupe+'-'+groupeComp).prop('disabled', false);
     }
 
     if(value == valueMax) {
-      $('#plus-'+groupeComp).prop('disabled', true);
+      $('#plus-'+grand_groupe+'-'+groupeComp).prop('disabled', true);
     }
     else {
-      $('#plus-'+groupeComp).prop('disabled', false);
+      $('#plus-'+grand_groupe+'-'+groupeComp).prop('disabled', false);
     }
   });
 }
@@ -800,6 +801,76 @@ $(window).load(function(){
     updateTableauCaracteristiques();
     updateCompetences();
     updateAffichagePoints();
+  });
+
+  function groupeCompetenceChange(id) {
+    var arrayDecompo = id.split('-');
+    var operation = arrayDecompo[0];
+    var grand_groupe = arrayDecompo[1];
+    var groupe_comp = arrayDecompo[2];
+    var idEdit = '#edit-'+grand_groupe+'-'+groupe_comp;
+    var ensemble_comps = $('.'+grand_groupe+groupe_comp);
+
+    if(operation == 'plus') {
+      var maxExists = false;
+      for (var i = 0; i < ensemble_comps.length; i++) {
+        var idComp = ensemble_comps[i].id;
+        var maxComp = parseInt($('#'+idComp).attr('max'));
+        var valueComp = parseInt($('#'+idComp).val());
+        if(maxComp == valueComp) {
+          maxExists = true;
+        }
+      }
+      if(!maxExists) {
+        var valueGC = parseInt($(idEdit).val());
+        valueGC = valueGC + 1;
+        $(idEdit).val(valueGC);
+        for (var i = 0; i < ensemble_comps.length; i++) {
+          var idComp = ensemble_comps[i].id;
+          var minComp = parseInt($('#'+idComp).attr('min'));
+          var valueComp = parseInt($('#'+idComp).val());
+          valueComp = valueComp + 1;
+          $('#'+idComp).val(valueComp);
+          minComp = minComp + 1;
+          $('#'+idComp).attr('min', minComp);
+        }
+        var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+        pointsDispos = pointsDispos - 10;
+        $('#titre-points-disponibles').attr('value', pointsDispos);
+      }
+    }
+    else {
+      var valueGC = parseInt($(idEdit).val());
+      valueGC = valueGC - 1;
+      $(idEdit).val(valueGC);
+      for (var i = 0; i < ensemble_comps.length; i++) {
+        var idComp = ensemble_comps[i].id;
+        var minComp = parseInt($('#'+idComp).attr('min'));
+        var valueComp = parseInt($('#'+idComp).val());
+        minComp = minComp - 1;
+        $('#'+idComp).attr('min', minComp);
+        valueComp = valueComp - 1;
+        $('#'+idComp).val(valueComp);
+      }
+      var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+      pointsDispos = pointsDispos + 10;
+      $('#titre-points-disponibles').attr('value', pointsDispos);
+    }
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateTableauCaracteristiques();
+    updateCompetences();
+    updateAffichagePoints();
+  }
+
+
+
+  $('.gcPlus').click(function(event){
+    groupeCompetenceChange(jQuery(this).attr("id"));
+  });
+
+  $('.gcMoins').click(function(event){
+    groupeCompetenceChange(jQuery(this).attr("id"));
   });
 
 
