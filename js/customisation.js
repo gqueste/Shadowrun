@@ -165,6 +165,25 @@ function verrouillageSpec() {
   });
 }
 
+function updateAffichageCaracTotal(){
+  $('.caracLiee').each(function() {
+    var id = this.id;
+    var arrayid = id.split('-');
+    var grand_groupe = arrayid[1];
+    var groupe_comp = arrayid[2];
+    var comp = arrayid[3];
+    var caracLiee = arrayid[4];
+    var valeur_comp = parseInt($('#edit-'+grand_groupe+'-'+groupe_comp+'-'+comp).val());
+    var valeur_carac = parseInt($('#edit-'+caracLiee).val());
+    $('#'+id).text('+ '+valeur_carac);
+    var valeur_totale = valeur_comp + valeur_carac;
+    if(valeur_comp == 0) {
+      valeur_totale = valeur_totale - 1;
+    }
+    $('#total-'+comp).text('= '+valeur_totale);
+  });
+}
+
 function updateCompetences() {
   var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
 
@@ -189,6 +208,8 @@ function updateCompetences() {
   else {
     gestionGroupeComp();
   }
+
+  updateAffichageCaracTotal();
 }
 
 
