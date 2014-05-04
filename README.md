@@ -10,9 +10,9 @@ TODO :
 	* Gestion des conséquences de Dépendance,... (champ pour indiquer le champ choisi) [Priorité faible]
 	* Placer description des traits [Priorité moyenne]
 - Compétences:
-	* Réponse aux actions + - des Groupes de compétence [Priorité haute]
-	* Gestion magie, technomancie [Priorité haute]
+	* Gestion magie, technomancie [Priorité moyenne]
 - Connaissances
+- Suivi des points par un menu flottant[Priorité haute]
 
 EVOLUTIONS POSSIBLES :
 - Place les données correspondant aux caractéristiques, traits, compétences avec les descriptions, etc... dans un fichier externe(JSON) ou BDD
