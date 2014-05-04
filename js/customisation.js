@@ -31,7 +31,7 @@ function gestionSpec(){
       for (var i = 0; i < specs.length; i++) {
         var specCourante = specs[i];
         var idSpec = '#'+specCourante.id;
-        if($(idSpec).prop('disabled')) {
+        if($(idSpec).prop('checked')) {
           checkboxCochee = idSpec;
         }
       }
@@ -88,20 +88,21 @@ function gestionComp() {
     var valueMin = parseInt($(id).attr('min'));
     var valueMax = parseInt($(id).attr('max'));
     var nameArray = id.split('-');
+    var grand_groupe = nameArray[1];
     var groupeComp = nameArray[2];
     var comp = nameArray[3];
     if(value == valueMin) {
-      $('#moins-'+groupeComp+'-'+comp).prop('disabled', true);
+      $('#moins-'+grand_groupe+"-"+groupeComp+'-'+comp).prop('disabled', true);
     }
     else {
-      $('#moins-'+groupeComp+'-'+comp).prop('disabled', false);
+      $('#moins-'+grand_groupe+"-"+groupeComp+'-'+comp).prop('disabled', false);
     }
 
     if(value == valueMax) {
-      $('#plus-'+groupeComp+'-'+comp).prop('disabled', true);
+      $('#plus-'+grand_groupe+"-"+groupeComp+'-'+comp).prop('disabled', true);
     }
     else {
-      $('#plus-'+groupeComp+'-'+comp).prop('disabled', false);
+      $('#plus-'+grand_groupe+"-"+groupeComp+'-'+comp).prop('disabled', false);
     }
   });
 }
@@ -723,6 +724,40 @@ $(window).load(function(){
     updateCompetences();
     updateAffichagePoints();
   });
+
+  function competenceChangee(id) {
+    var arrayDecompo = id.split("-");
+    var operation = arrayDecompo[0];
+    var grand_groupe = arrayDecompo[1];
+    var groupe_comp = arrayDecompo[2];
+    var comp = arrayDecompo[3];
+    var idEdit = '#edit-'+grand_groupe+'-'+groupe_comp+'-'+comp;
+    var valeurCourante = parseInt($(idEdit).val());
+    if(operation == 'plus') {
+      valeurCourante = valeurCourante + 1;
+    }
+    else {
+      valeurCourante = valeurCourante - 1;
+    }
+    
+    $(idEdit).val(valeurCourante);
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateTableauCaracteristiques();
+    updateCompetences();
+    updateAffichagePoints();
+  }
+
+
+  $('.compPlus').click(function(event) {
+    competenceChangee(jQuery(this).attr("id"));
+  });
+
+  $('.compMoins').click(function(event) {
+    competenceChangee(jQuery(this).attr("id"));
+  });
+
+
 
 });
 //]]>

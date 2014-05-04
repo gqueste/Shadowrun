@@ -704,12 +704,12 @@ function tableauCompetences($grand_groupe, $groupe_comp, $comp) {
             <input class='form-control comp ".$nameGC." ".$nameComp."' id='edit-".$grand_groupe."-".$nameGC."-".$nameComp."' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>
             <div class='input-group-btn'>
               <span class='input-group-btn'>
-                <button id='plus-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm compPlus ".$nameGC." ".$nameComp."' type='button' onclick='' style='cursor:pointer'>
+                <button id='plus-".$grand_groupe."-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm compPlus ".$nameGC." ".$nameComp."' type='button' onclick='' style='cursor:pointer'>
                   <span class='glyphicon glyphicon-chevron-up'></span>
                 </button>
               </span>
               <span class='input-group-btn'>
-                <button id='moins-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm compMoins ".$nameGC." ".$nameComp." moins' type='button' onclick='' disabled>
+                <button id='moins-".$grand_groupe."-".$nameGC."-".$nameComp."' class='btn btn-default btn-sm compMoins ".$nameGC." ".$nameComp." moins' type='button' onclick='' disabled>
                   <span class='glyphicon glyphicon-chevron-down'></span>
                 </button>
               </span>
