@@ -733,12 +733,16 @@ $(window).load(function(){
     var comp = arrayDecompo[3];
     var idEdit = '#edit-'+grand_groupe+'-'+groupe_comp+'-'+comp;
     var valeurCourante = parseInt($(idEdit).val());
+    var valeur_points = parseInt($('#titre-points-disponibles').attr('value'));
     if(operation == 'plus') {
       valeurCourante = valeurCourante + 1;
+      valeur_points = valeur_points - 4;
     }
     else {
       valeurCourante = valeurCourante - 1;
+      valeur_points = valeur_points + 4;
     }
+    $('#titre-points-disponibles').attr('value', valeur_points);
     
     $(idEdit).val(valeurCourante);
     updatePointsAvantage();
