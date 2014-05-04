@@ -68,11 +68,20 @@ function gestionSpec(){
       for (var i = 0; i < specs.length; i++) {
         var specCourante = specs[i];
         var idSpec = '#'+specCourante.id;
+        if($(idSpec).prop('checked')) {
+          $(idSpec).prop('checked', false);
+          var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
+          valuePoints = valuePoints + 2;
+          $('#titre-points-disponibles').attr('value', valuePoints);
+        }
+
+
         $(idSpec).prop('disabled', true);
         var arrayid = idSpec.split('-');
         var nameSpec = arrayid[2];
         if(nameSpec == 'specialite') {
           var idInput = '#input-'+arrayid[1]+'-'+nameSpec;
+          $(idInput).val('');
           $(idInput).prop('disabled', true);
         }
       }
@@ -759,6 +768,38 @@ $(window).load(function(){
 
   $('.compMoins').click(function(event) {
     competenceChangee(jQuery(this).attr("id"));
+  });
+
+  $('.checkboxspec').click(function() {
+    var id = jQuery(this).attr("id");
+    var arrayid = id.split('-');
+    var nameSpec = arrayid[2];
+
+    if($('#'+id).prop('checked')) {
+      if(nameSpec == 'specialite') {
+        var idInput = '#input-'+arrayid[1]+'-'+nameSpec;
+        $(idInput).prop('disabled', false);
+      }
+      var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
+      valuePoints = valuePoints - 2;
+      $('#titre-points-disponibles').attr('value', valuePoints);
+    }
+    else {
+      if(nameSpec == 'specialite') {
+        var idInput = '#input-'+arrayid[1]+'-'+nameSpec;
+        $(idInput).val('');
+        $(idInput).prop('disabled', true);
+      }
+      var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
+      valuePoints = valuePoints + 2;
+      $('#titre-points-disponibles').attr('value', valuePoints);
+    }
+    
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateTableauCaracteristiques();
+    updateCompetences();
+    updateAffichagePoints();
   });
 
 
