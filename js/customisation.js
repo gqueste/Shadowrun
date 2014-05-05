@@ -70,6 +70,9 @@ function gestionSpec(){
         var idSpec = '#'+specCourante.id;
         if($(idSpec).prop('checked')) {
           $(idSpec).prop('checked', false);
+          var valueMenu = parseInt($('#competences').attr('value'));
+          valueMenu = valueMenu - 2;
+          $('#competences').attr('value', valueMenu);
           var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
           valuePoints = valuePoints + 2;
           $('#titre-points-disponibles').attr('value', valuePoints);
@@ -221,6 +224,7 @@ function updateCompetences() {
   }
 
   updateAffichageCaracTotal();
+  $('#competences').html('Compétences : ' + $('#competences').attr('value') + ' PC');
 }
 
 
@@ -228,12 +232,7 @@ $(window).load(function(){
 
   function updateAffichagePoints(){
     var points_carac = parseInt($('#titre-caracteristiques').attr('value'));
-    if(points_carac == 0 || points_carac == 1) {
-      $('#titre-caracteristiques').html(points_carac + " Point disponible");  
-    }
-    else {
-      $('#titre-caracteristiques').html(points_carac + " Points disponibles");  
-    }
+    $('#titre-caracteristiques').html("Caractéristiques : "+points_carac+' PC');  
     $('#titre-points-disponibles').html("Nombre de points disponibles : " + $('#titre-points-disponibles').attr('value'));
 
     //Block traits Avantages décochés / + si titrePointsDispo.value < aux prix des traits
@@ -744,15 +743,19 @@ $(window).load(function(){
     var idEdit = '#edit-'+grand_groupe+'-'+groupe_comp+'-'+comp;
     var valeurCourante = parseInt($(idEdit).val());
     var valeur_points = parseInt($('#titre-points-disponibles').attr('value'));
+    var valueMenu = parseInt($('#competences').attr('value'));
     if(operation == 'plus') {
       valeurCourante = valeurCourante + 1;
       valeur_points = valeur_points - 4;
+      valueMenu = valueMenu + 4;
     }
     else {
       valeurCourante = valeurCourante - 1;
       valeur_points = valeur_points + 4;
+      valueMenu = valueMenu - 4;
     }
     $('#titre-points-disponibles').attr('value', valeur_points);
+    $('#competences').attr('value', valueMenu);
     
     $(idEdit).val(valeurCourante);
     updatePointsAvantage();
@@ -781,6 +784,9 @@ $(window).load(function(){
         var idInput = '#input-'+arrayid[1]+'-'+nameSpec;
         $(idInput).prop('disabled', false);
       }
+      var valueMenu = parseInt($('#competences').attr('value'));
+      valueMenu = valueMenu + 2;
+      $('#competences').attr('value', valueMenu);
       var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
       valuePoints = valuePoints - 2;
       $('#titre-points-disponibles').attr('value', valuePoints);
@@ -791,6 +797,9 @@ $(window).load(function(){
         $(idInput).val('');
         $(idInput).prop('disabled', true);
       }
+      var valueMenu = parseInt($('#competences').attr('value'));
+      valueMenu = valueMenu - 2;
+      $('#competences').attr('value', valueMenu);
       var valuePoints = parseInt($('#titre-points-disponibles').attr('value'));
       valuePoints = valuePoints + 2;
       $('#titre-points-disponibles').attr('value', valuePoints);
@@ -834,9 +843,12 @@ $(window).load(function(){
           minComp = minComp + 1;
           $('#'+idComp).attr('min', minComp);
         }
+        var valueMenu = parseInt($('#competences').attr('value'));
         var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+        valueMenu = valueMenu + 10;
         pointsDispos = pointsDispos - 10;
         $('#titre-points-disponibles').attr('value', pointsDispos);
+        $('#competences').attr('value', valueMenu);
       }
     }
     else {
@@ -852,9 +864,12 @@ $(window).load(function(){
         valueComp = valueComp - 1;
         $('#'+idComp).val(valueComp);
       }
+      var valueMenu = parseInt($('#competences').attr('value'));
       var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
       pointsDispos = pointsDispos + 10;
+      valueMenu = valueMenu - 10;
       $('#titre-points-disponibles').attr('value', pointsDispos);
+      $('#competences').attr('value', valueMenu);
     }
     updatePointsAvantage();
     updatePointsDefaut();

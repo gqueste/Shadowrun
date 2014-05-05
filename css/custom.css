@@ -1,0 +1,11 @@
+div#pointsCustomisation {
+	width: 10%;
+	float: left;
+	position: fixed;
+	left: 2%;
+}
+
+#pointsCustomisation {
+	border-radius: 10px;
+	background-color: white;
+}

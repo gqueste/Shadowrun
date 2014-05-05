@@ -10,6 +10,7 @@
     	<link href="css/bootstrap.min.css" rel="stylesheet">
     	<link href="css/bootstrap.css" rel="stylesheet">
     	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+      <link href="css/custom.css" rel="stylesheet">
     	<script src="js/jquery-1.11.0.min.js"></script>
 
     	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -53,11 +54,18 @@ $competences;
 init();
 
 echo "<h2 style='text-align:center;'>".$_POST['choix-metatype']."</h2>
-      <h3 id='titre-points-disponibles' style='text-align:center;' value='".$points_disponibles."'>Nombre de points disponibles : ".$points_disponibles."</h2>";
+      <div id='pointsCustomisation' style='text-align:center;'>
+        <h4>Points Disponibles</h4>
+        <h5 id='titre-caracteristiques' value='".$points_caracteristiques."'>Caractéristiques : ".$points_caracteristiques." PC</h5>
+        <h5 id='avantages' value='0'>Avantages : 0 PC</h5>
+        <h5 id='defauts' value='0'>Défauts : 0 PC</h5>
+        <h5 id='competences' value='0'>Compétences : 0 PC</h5>
+        <hr/>
+        <h4 id='titre-points-disponibles' style='text-align:center;' value='".$points_disponibles."'>Nombre de points disponibles : ".$points_disponibles."</h4>
+      </div>";
 
 echo"<div id='caracteristiques'>
     <h2>Caractéristiques</h2>
-    <h3 id='titre-caracteristiques' value='".$points_caracteristiques."'>".$points_caracteristiques." Points disponibles</h3>
     <table class='table table-bordered' style='text-align:center;'>
       <tr>
         <th style='text-align:center;' class='Carac' id='titre-constitution'>Constitution</th>
@@ -95,7 +103,6 @@ echo "    </tr>
 
 echo "<div class='col-md-12'>
         <h2>Traits</h2>
-        <h3 id='avantages' value='0'>Avantages : 0 PC</h3>
         <div class='col-md-6'>
           <table class='table table-hover'>
             <thead>
@@ -121,7 +128,6 @@ echo "
       </div>
       </div>
       <div class='col-md-12'>
-      <h3 id='defauts' value='0'>Défauts : 0 PC</h3>
         <div class='col-md-6'>
           <table class='table table-hover'>
             <thead>
@@ -150,7 +156,6 @@ echo"      </tbody>
 
   <div class='col-md-12'>
     <h2>Compétences</h2>
-    <h3 id='competences' value='0'>Compétences : 0 PC</h3>
     <table class='table table-bordered'>
     ";
 
