@@ -164,6 +164,69 @@ foreach($tab_comp as $grand_groupe) {
   regionTableauCompetences($grand_groupe);
 }
 
+echo " </table>
+  </div>
+  <div class='col-md-12'>
+    <h2>Connaissances et contacts</h2>
+    <table class='table table-bordered'>
+";
+for ($i=1; $i <= 10; $i++) { 
+  echo "
+  <tr>
+    <td><input id='input-connaissance-".$i."-nom' type='text' class='form-control connaissance connaissanceNom' style='width:200px' placeholder='Connaissance ".$i."'></td>
+    <td>
+      <div class='input-group input-group-sm' style='width:117px'>
+        <input class='form-control connaissance connaissance' id='edit-connaissance-".$i."-value' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>    
+        <div class='input-group-btn'>
+          <span class='input-group-btn'>
+            <button id='plus-connaissance-".$i."' class='btn btn-default btn-sm connaissancePlus' type='button' onclick='' style='cursor:pointer' disabled>
+              <span class='glyphicon glyphicon-chevron-up'></span>
+            </button>
+          </span>
+          <span class='input-group-btn'>
+            <button id='moins-connaissance-".$i."' class='btn btn-default btn-sm connaissanceMoins' type='button' onclick='' disabled>
+              <span class='glyphicon glyphicon-chevron-down'></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </td>
+  </tr>
+  ";
+}
+
+echo "
+  <tr>
+    <td colspan='2'><hr/></td>
+  </tr>";
+
+for ($i=1; $i <= 5; $i++) { 
+  echo "
+  <tr>
+    <td><input id='input-connaissance-".$i."-nom' type='text' class='form-control connaissance connaissanceNom' style='width:200px' placeholder='Contact ".$i."'></td>
+    <td>
+      <div class='input-group input-group-sm' style='width:117px'>
+        <input class='form-control connaissance connaissance' id='edit-connaissance-".$i."-value' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>    
+        <div class='input-group-btn'>
+          <span class='input-group-btn'>
+            <button id='plus-connaissance-".$i."' class='btn btn-default btn-sm connaissancePlus' type='button' onclick='' style='cursor:pointer' disabled>
+              <span class='glyphicon glyphicon-chevron-up'></span>
+            </button>
+          </span>
+          <span class='input-group-btn'>
+            <button id='moins-connaissance-".$i."' class='btn btn-default btn-sm connaissanceMoins' type='button' onclick='' disabled>
+              <span class='glyphicon glyphicon-chevron-down'></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </td>
+  </tr>
+  ";
+}
+
+
+
 
 
 function init() {
@@ -768,10 +831,13 @@ function tableauSpecialites($nameGC, $comp, $spec) {
   ";
 }
 
-?>  
-    </table>
+?> 
+
+  </table>
   </div>
+    
   <script type="text/javascript">updateCompetences();</script>
+  <script type="text/javascript">updateConnaissances();</script>
     </div>
  	</body>
 </html>

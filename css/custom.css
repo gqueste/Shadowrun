@@ -7,7 +7,7 @@ div#pointsCustomisation {
 
 #pointsCustomisation {
 	border-radius: 10px;
-	background-color: white;
+	background-color: none;
 }
 
 @media only screen and (max-width:1500px) {
@@ -15,11 +15,6 @@ div#pointsCustomisation {
 	div#pointsCustomisation {
 		position: relative;
 		width: 100%;		
-	}
-
-	#pointsCustomisation {
-		border-radius: 10px;
-		background-color: white;
 	}
 }
 

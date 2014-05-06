@@ -227,6 +227,17 @@ function updateCompetences() {
   $('#competences').html('Compétences : ' + $('#competences').attr('value') + ' PC');
 }
 
+function updateConnaissances(){
+  var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+
+  //Si points pas dispos
+    //verouiller tous les input où la valeur associée est 0
+    //Pour les autres, verrouiller les + et déverouiller les -
+  //Si points Dispos
+    //enable tous les input
+    //verrouiller les + si max, les - si min
+}
+
 
 $(window).load(function(){
 
@@ -454,6 +465,7 @@ $(window).load(function(){
     }
     updateTableauCaracteristiques();
     updateCompetences();
+    updateConnaissances();
     updateAffichagePoints();
   });
 
@@ -659,6 +671,7 @@ $(window).load(function(){
     updatePointsDefaut();
     updateTableauCaracteristiques();
     updateCompetences();
+    updateConnaissances();
     updateAffichagePoints();
   });
 
@@ -731,6 +744,7 @@ $(window).load(function(){
     updatePointsDefaut();
     updateTableauCaracteristiques();
     updateCompetences();
+    updateConnaissances();
     updateAffichagePoints();
   });
 
@@ -762,6 +776,7 @@ $(window).load(function(){
     updatePointsDefaut();
     updateTableauCaracteristiques();
     updateCompetences();
+    updateConnaissances();
     updateAffichagePoints();
   }
 
@@ -809,6 +824,7 @@ $(window).load(function(){
     updatePointsDefaut();
     updateTableauCaracteristiques();
     updateCompetences();
+    updateConnaissances();
     updateAffichagePoints();
   });
 
@@ -875,6 +891,7 @@ $(window).load(function(){
     updatePointsDefaut();
     updateTableauCaracteristiques();
     updateCompetences();
+    updateConnaissances();
     updateAffichagePoints();
   }
 
@@ -888,6 +905,33 @@ $(window).load(function(){
     groupeCompetenceChange(jQuery(this).attr("id"));
   });
 
+
+
+  $('.connaissanceNom').change(function(event) {
+    var idEditNom = '#'+this.id;
+    var arrayDecompo = idEditNom.split('-');
+    var numeroChamp = arrayDecompo[2];
+    var textEdit = $(idEditNom).val();
+    var idEditValue = '#edit-connaissance-'+numeroChamp+'-value';
+    var valueConnaissance = parseInt($(idEditValue).val());
+
+    if(valueConnaissance == 0 ) {
+      if(textEdit != '') {
+        //Nouvelle connaissance ou contact entré
+      }
+    }
+    else {
+      if(textEdit == '') {
+        //Suppression de la connaissance ou contact
+      }
+    }
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateTableauCaracteristiques();
+    updateCompetences();
+    updateConnaissances();
+    updateAffichagePoints();
+  });
 
 
 });
