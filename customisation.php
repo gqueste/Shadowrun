@@ -60,6 +60,7 @@ echo "<h2 style='text-align:center;'>".$_POST['choix-metatype']."</h2>
         <h5 id='avantages' value='0'>Avantages : 0 PC</h5>
         <h5 id='defauts' value='0'>Défauts : 0 PC</h5>
         <h5 id='competences' value='0'>Compétences : 0 PC</h5>
+        <h5 id='connaissances' value='0'>Connaissances : 0 PC</h5>
         <hr/>
         <h4 id='titre-points-disponibles' style='text-align:center;' value='".$points_disponibles."'>Nombre de points disponibles : ".$points_disponibles."</h4>
       </div>";
@@ -176,7 +177,7 @@ for ($i=1; $i <= 10; $i++) {
     <td><input id='input-connaissance-".$i."-nom' type='text' class='form-control connaissance connaissanceNom' style='width:200px' placeholder='Connaissance ".$i."'></td>
     <td>
       <div class='input-group input-group-sm' style='width:117px'>
-        <input class='form-control connaissance connaissance' id='edit-connaissance-".$i."-value' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>    
+        <input class='form-control connaissance connaissanceValeur' id='edit-connaissance-".$i."-value' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>    
         <div class='input-group-btn'>
           <span class='input-group-btn'>
             <button id='plus-connaissance-".$i."' class='btn btn-default btn-sm connaissancePlus' type='button' onclick='' style='cursor:pointer' disabled>
@@ -200,13 +201,13 @@ echo "
     <td colspan='2'><hr/></td>
   </tr>";
 
-for ($i=1; $i <= 5; $i++) { 
+for ($i=11; $i <= 15; $i++) { 
   echo "
   <tr>
     <td><input id='input-connaissance-".$i."-nom' type='text' class='form-control connaissance connaissanceNom' style='width:200px' placeholder='Contact ".$i."'></td>
     <td>
       <div class='input-group input-group-sm' style='width:117px'>
-        <input class='form-control connaissance connaissance' id='edit-connaissance-".$i."-value' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>    
+        <input class='form-control connaissance connaissanceValeur' id='edit-connaissance-".$i."-value' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>    
         <div class='input-group-btn'>
           <span class='input-group-btn'>
             <button id='plus-connaissance-".$i."' class='btn btn-default btn-sm connaissancePlus' type='button' onclick='' style='cursor:pointer' disabled>

@@ -155,7 +155,7 @@ function verrouillageGroupeComp() {
   });
 }
 
-function verrouilageComp() {
+function verrouillageComp() {
   $('.compPlus').each(function(){
     var id = this.id;
     id = '#'+id;
@@ -228,14 +228,61 @@ function updateCompetences() {
 }
 
 function updateConnaissances(){
+  var valueConnaissance = parseInt($('#connaissances').attr('value'));
   var pointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+  var tabValeurs = $('.connaissanceValeur');
 
-  //Si points pas dispos
-    //verouiller tous les input où la valeur associée est 0
-    //Pour les autres, verrouiller les + et déverouiller les -
-  //Si points Dispos
-    //enable tous les input
-    //verrouiller les + si max, les - si min
+  for (var i = 0; i < tabValeurs.length; i++) {
+    var idConnValeur = '#'+ tabValeurs[i].id;
+    var valeur = parseInt($(idConnValeur).val());
+    var valeurMin = parseInt($(idConnValeur).attr('min'));
+    var valeurMax = parseInt($(idConnValeur).attr('max'));
+    var arrayid = idConnValeur.split('-');
+    var numero = arrayid[2];
+    var idBoutonMoins = '#moins-connaissance-'+numero;
+    var idBoutonPlus = '#plus-connaissance-'+numero;
+    if(valeur == valeurMin) {
+      $(idBoutonMoins).prop('disabled', true);
+    }
+    else {
+      $(idBoutonMoins).prop('disabled', false);
+    }
+
+
+    if(valeur == valeurMax) {
+      $(idBoutonPlus).prop('disabled', true);
+    }
+    else {
+      if($(idBoutonMoins).prop('disabled')) {
+        $(idBoutonPlus).prop('disabled', true);
+      }
+      else {
+        if(pointsDispos < 2) {
+          $(idBoutonPlus).prop('disabled', true);
+        }
+        else {
+          $(idBoutonPlus).prop('disabled', false);
+        }
+      }
+    }
+    var idEdit = '#input-connaissance-'+numero+'-nom';
+    var nomConnaissance = $(idEdit).val();
+
+    if(valeur == 0) {
+      $(idEdit).val('');
+    }
+
+
+    if(nomConnaissance == '') {
+      if(pointsDispos >= 2) {
+        $(idEdit).prop('disabled', false);
+      }
+      else {
+        $(idEdit).prop('disabled', true);
+      }
+    }
+  }
+  $('#connaissances').html('Connaissances : '+valueConnaissance+' PC');
 }
 
 
@@ -915,16 +962,82 @@ $(window).load(function(){
     var idEditValue = '#edit-connaissance-'+numeroChamp+'-value';
     var valueConnaissance = parseInt($(idEditValue).val());
 
+    var valueTotalConnaissances = parseInt($('#connaissances').attr('value'));
+    var valuePointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+
     if(valueConnaissance == 0 ) {
       if(textEdit != '') {
         //Nouvelle connaissance ou contact entré
+        valueConnaissance = valueConnaissance + 1;
+        valueTotalConnaissances = valueTotalConnaissances + 2;
+        valuePointsDispos = valuePointsDispos - 2;
       }
     }
     else {
       if(textEdit == '') {
         //Suppression de la connaissance ou contact
+        valueConnaissance = valueConnaissance - 1;
+        valueTotalConnaissances = valueTotalConnaissances - 2;
+        valuePointsDispos = valuePointsDispos + 2;
       }
     }
+    $(idEditValue).val(valueConnaissance);
+    $('#connaissances').attr('value', valueTotalConnaissances);
+    $('#titre-points-disponibles').attr('value', valuePointsDispos);
+
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateTableauCaracteristiques();
+    updateCompetences();
+    updateConnaissances();
+    updateAffichagePoints();
+  });
+
+
+  $('.connaissancePlus').click(function(event){
+    var idButtonPlus = '#'+this.id;
+    var arrayDecompo = idButtonPlus.split('-');
+    var numeroChamp = arrayDecompo[2];
+    var idEditValue = '#edit-connaissance-'+numeroChamp+'-value';
+    var valueConnaissance = parseInt($(idEditValue).val());
+
+    var valueTotalConnaissances = parseInt($('#connaissances').attr('value'));
+    var valuePointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+
+    valueConnaissance = valueConnaissance + 1;
+    valueTotalConnaissances = valueTotalConnaissances + 2;
+    valuePointsDispos = valuePointsDispos - 2;
+
+    $(idEditValue).val(valueConnaissance);
+    $('#connaissances').attr('value', valueTotalConnaissances);
+    $('#titre-points-disponibles').attr('value', valuePointsDispos);
+
+    updatePointsAvantage();
+    updatePointsDefaut();
+    updateTableauCaracteristiques();
+    updateCompetences();
+    updateConnaissances();
+    updateAffichagePoints();
+  });
+
+  $('.connaissanceMoins').click(function(event){
+    var idButtonPlus = '#'+this.id;
+    var arrayDecompo = idButtonPlus.split('-');
+    var numeroChamp = arrayDecompo[2];
+    var idEditValue = '#edit-connaissance-'+numeroChamp+'-value';
+    var valueConnaissance = parseInt($(idEditValue).val());
+
+    var valueTotalConnaissances = parseInt($('#connaissances').attr('value'));
+    var valuePointsDispos = parseInt($('#titre-points-disponibles').attr('value'));
+
+    valueConnaissance = valueConnaissance - 1;
+    valueTotalConnaissances = valueTotalConnaissances - 2;
+    valuePointsDispos = valuePointsDispos + 2;
+
+    $(idEditValue).val(valueConnaissance);
+    $('#connaissances').attr('value', valueTotalConnaissances);
+    $('#titre-points-disponibles').attr('value', valuePointsDispos);
+
     updatePointsAvantage();
     updatePointsDefaut();
     updateTableauCaracteristiques();
