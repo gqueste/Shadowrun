@@ -11,9 +11,6 @@ TODO :
 	* Placer description des traits [Priorité moyenne]
 - Compétences:
 	* Gestion magie, technomancie [Priorité moyenne]
-- Connaissances:
-	* Gestion des réactions
-	* Mise en place des points disponibles dans le menu
 
 EVOLUTIONS POSSIBLES :
 - Place les données correspondant aux caractéristiques, traits, compétences avec les descriptions, etc... dans un fichier externe(JSON) ou BDD
