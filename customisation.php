@@ -32,7 +32,7 @@
             			<span class="icon-bar"></span>
             			<span class="icon-bar"></span>
           			</button>
-          			<a class="navbar-brand" href="index.html">Shadowrun - Création de personnage</a>
+          			<a href="index.html"><img id='imgEntete' class="navbar-brand" src='./img/shadowrun4_logo.png'></img></a>
         		</div>
       		</div>
     	</div>
