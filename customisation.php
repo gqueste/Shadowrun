@@ -204,7 +204,7 @@ echo "
 for ($i=11; $i <= 15; $i++) { 
   echo "
   <tr>
-    <td><input id='input-connaissance-".$i."-nom' type='text' class='form-control connaissance connaissanceNom' style='width:200px' placeholder='Contact ".$i."'></td>
+    <td><input id='input-connaissance-".$i."-nom' type='text' class='form-control connaissance connaissanceNom' style='width:200px' placeholder='Contact ".($i-10)."'></td>
     <td>
       <div class='input-group input-group-sm' style='width:117px'>
         <input class='form-control connaissance connaissanceValeur' id='edit-connaissance-".$i."-value' type='number' min='0' max ='6' value='0' readonly size='2' style='text-align:center;'>    
