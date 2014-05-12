@@ -1,26 +1,20 @@
 div#pointsCustomisation {
-	width: 10%;
-	float: left;
+
+	z-index: 1000;
 	position: fixed;
-	left: 2%;
+	float: right;
+	left : 90%;
+	width: 10%;
+	background-color: white;
 }
+
 
 #pointsCustomisation {
 	border-radius: 10px;
 	background-color: none;
 }
 
-@media only screen and (max-width:1500px) {
 
-	div#pointsCustomisation {
-		z-index: 1000;
-		position: fixed;
-		float: right;
-		left : 90%;
-		width: 10%;
-		background-color: white;	
-	}
-}
 
 @media only screen and (max-width:950px) {
 
@@ -32,9 +26,21 @@ div#pointsCustomisation {
 	}
 }
 
+
+
 img#imgEntete{
 	padding-top: 1px;
 	padding-bottom: 1px;
 }
 
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
 
