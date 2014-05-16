@@ -13,6 +13,8 @@ TODO :
 	* Gestion magie, technomancie [Priorité moyenne]
 - Lors d'un refresh, garder les points mis, et cases cochées et tableau des points dépensés
 - Bouton Reset
+- Génère la feuille de personnage
+- Equipement
 
 EVOLUTIONS POSSIBLES :
 - Place les données correspondant aux caractéristiques, traits, compétences avec les descriptions, etc... dans un fichier externe(JSON) ou BDD
