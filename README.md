@@ -1,20 +1,27 @@
 Shadowrun
 =========
 
-Projet lié au Jeu de rôle Shadowrun
+Character generator for the paper role play game Shadowrun.
+
+Front end : Javascript (JQuery)
+
+Back end : None
+
+
+Projet liÃ© au Jeu de rÃ´le Shadowrun
 
 TODO :
 - Traits :
-	* Gestion des conséquences de Attribut Exceptionnel / Aptitude [Priorité faible]
-	* Gestion des conséquences de Esprit Mentor [Priorité faible]
-	* Gestion des conséquences de Dépendance,... (champ pour indiquer le champ choisi) [Priorité faible]
-	* Placer description des traits [Priorité moyenne]
-- Compétences:
-	* Gestion magie, technomancie [Priorité moyenne]
-- Lors d'un refresh, garder les points mis, et cases cochées et tableau des points dépensés
+	* Gestion des consÃ©quences de Attribut Exceptionnel / Aptitude [PrioritÃ© faible]
+	* Gestion des consÃ©quences de Esprit Mentor [PrioritÃ© faible]
+	* Gestion des consÃ©quences de DÃ©pendance,... (champ pour indiquer le champ choisi) [PrioritÃ© faible]
+	* Placer description des traits [PrioritÃ© moyenne]
+- CompÃ©tences:
+	* Gestion magie, technomancie [PrioritÃ© moyenne]
+- Lors d'un refresh, garder les points mis, et cases cochÃ©es et tableau des points dÃ©pensÃ©s
 - Bouton Reset
-- Génère la feuille de personnage
+- GÃ©nÃ¨re la feuille de personnage
 - Equipement
 
 EVOLUTIONS POSSIBLES :
-- Place les données correspondant aux caractéristiques, traits, compétences avec les descriptions, etc... dans un fichier externe(JSON) ou BDD
+- Place les donnÃ©es correspondant aux caractÃ©ristiques, traits, compÃ©tences avec les descriptions, etc... dans un fichier externe(JSON) ou BDD
